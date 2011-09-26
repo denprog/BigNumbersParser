@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BigNumbersParser", "lib\BigNumbersParser.vcproj", "{18B86548-5087-47FF-8045-4A67AEC93056}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BigNumbersParserTest", "lib_test\BigNumbersParserTest.vcproj", "{1F4E9371-85D5-45F4-BB75-96A7C8E9D4F2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{18B86548-5087-47FF-8045-4A67AEC93056} = {18B86548-5087-47FF-8045-4A67AEC93056}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{18B86548-5087-47FF-8045-4A67AEC93056}.Debug|Win32.ActiveCfg = Debug|Win32
+		{18B86548-5087-47FF-8045-4A67AEC93056}.Debug|Win32.Build.0 = Debug|Win32
+		{18B86548-5087-47FF-8045-4A67AEC93056}.Release|Win32.ActiveCfg = Release|Win32
+		{18B86548-5087-47FF-8045-4A67AEC93056}.Release|Win32.Build.0 = Release|Win32
+		{1F4E9371-85D5-45F4-BB75-96A7C8E9D4F2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1F4E9371-85D5-45F4-BB75-96A7C8E9D4F2}.Debug|Win32.Build.0 = Debug|Win32
+		{1F4E9371-85D5-45F4-BB75-96A7C8E9D4F2}.Release|Win32.ActiveCfg = Release|Win32
+		{1F4E9371-85D5-45F4-BB75-96A7C8E9D4F2}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
