@@ -7,7 +7,7 @@
 #include <boost/test/output_test_stream.hpp>
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
-#include "../source/Parser.h"
+#include "../source/BigNumbersParser.h"
 
 #ifdef _WIN32
 #include <windows.h>

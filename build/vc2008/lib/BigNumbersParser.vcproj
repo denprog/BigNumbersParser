@@ -60,7 +60,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="mpir.lib mpfr.lib"
+				AdditionalDependencies="$(MPIR)lib\Win32\Debug\mpir.lib $(MPFR)Debug\mpfr.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -80,7 +80,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="$(ProjectDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="2"
@@ -158,6 +158,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\..\..\source\BigNumbersParser.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\source\Definition.cpp"
 				>
 			</File>
@@ -175,10 +179,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\source\MathHelper.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\Parser.cpp"
 				>
 			</File>
 			<File
@@ -220,6 +220,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\source\BigNumbersParser.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\source\Definition.h"
 				>
 			</File>
@@ -241,10 +245,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\source\MathHelper.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\Parser.h"
 				>
 			</File>
 			<File
