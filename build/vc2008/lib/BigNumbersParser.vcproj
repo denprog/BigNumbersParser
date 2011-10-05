@@ -60,7 +60,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="$(MPIR)lib\Win32\Debug\mpir.lib $(MPFR)Debug\mpfr.lib"
+				AdditionalDependencies="$(MPIR)dll\Win32\Debug\mpir.lib $(MPFR)Debug\mpfr.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -76,6 +76,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="rem copy $(MPFR)build.vc9\Debug\mpfr.dll $(TargetDir)mpfr.dll"
 			/>
 		</Configuration>
 		<Configuration

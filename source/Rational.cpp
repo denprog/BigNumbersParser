@@ -370,6 +370,30 @@ namespace BigNumbersParser
 		return mpq_cmp_si(num2.number, num1, 1) >= 0;
 	}
 
+	Integer Rational::GetNumerator()
+	{
+		Integer numerator;
+		mpz_t numer;
+		mpz_init(numer);
+
+		mpq_get_num(numer, number);
+		numerator = numer;
+
+		return numerator;
+	}
+	
+	Integer Rational::GetDenomerator()
+	{
+		Integer denomerator;
+		mpz_t denom;
+		mpz_init(denom);
+
+		mpq_get_den(denom, number);
+		denomerator = denom;
+
+		return denomerator;
+	}
+
 	string Rational::ToString() const
 	{
 		char* tmp = (char*)malloc(mpz_sizeinbase(mpq_numref(number), 10) + 
