@@ -64,6 +64,7 @@ namespace BigNumbersParser
 		mpz_set_str(number, str.c_str(), 10);
 		int res = mpz_sizeinbase(number, 2);
 		bitPrecisions[precision] = res;
+		mpz_clear(number);
 		
 		return res;
 	}
@@ -83,6 +84,7 @@ namespace BigNumbersParser
 		mpz_set_str(number, str.c_str(), 2);
 		int res = mpz_sizeinbase(number, 10);
 		decimalPrecisions[precision] = res;
+		mpz_clear(number);
 		
 		return res;
 	}

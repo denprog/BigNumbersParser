@@ -4,6 +4,7 @@
 #include <string>
 #include <mpir.h>
 #include "MathHelper.h"
+#include "Integer.h"
 
 #define TRACE_OUTPUT
 
@@ -74,6 +75,9 @@ namespace BigNumbersParser
 		friend bool operator<=(const int num1, const Rational& num2);
 
 	public:
+		Integer GetNumerator();
+		Integer GetDenomerator();
+	
 		string ToString() const;
 
 		int GetPrecision() const

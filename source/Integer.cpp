@@ -96,6 +96,17 @@ namespace BigNumbersParser
 		return *this;
 	}
 
+	Integer& Integer::operator=(const mpz_t& source)
+	{
+		mpz_set(number, source);
+
+#ifdef TRACE_OUTPUT
+		UpdateNumberStr();
+#endif
+
+		return *this;
+	}
+
 	Integer Integer::operator+()
 	{
 		Integer res(*this);
@@ -331,6 +342,24 @@ namespace BigNumbersParser
 		Integer res;
 
 		mpz_pow_ui(res.number, num1.number, (int)num2);
+
+		return res;
+	}
+
+	Integer abs(const Integer& num)
+	{
+		Integer res;
+
+		mpz_abs(res.number, num.number);
+
+		return res;
+	}
+
+	Integer fact(const Integer& num)
+	{
+		Integer res;
+
+		mpz_fac_ui(res.number, (int)num);
 
 		return res;
 	}

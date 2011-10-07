@@ -26,6 +26,7 @@ namespace BigNumbersParser
 		
 		Integer& operator=(const Integer& source);
 		Integer& operator=(const string& num);
+		Integer& operator=(const mpz_t& source);
 		
 		Integer operator+();
 		Integer operator-();
@@ -68,6 +69,10 @@ namespace BigNumbersParser
 
 	public:
 		friend Integer pow(const Integer& num1, const Integer& num2);
+
+		friend Integer abs(const Integer& num);
+
+		friend Integer fact(const Integer& num);
 
 	public:
 		int GetPrecision() const;
