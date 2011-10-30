@@ -80,10 +80,10 @@ namespace BigNumbersParser
 		void operator/=(const int num);
 		void operator/=(const float num);
 
-public:
-	operator int() const;
+	public:
+		operator int() const;
 
-public:
+	public:
 		friend bool operator==(const Real& num1, const Real& num2);
 		friend bool operator==(const Real& num1, const int num2);
 		friend bool operator==(const int num1, const Real& num2);

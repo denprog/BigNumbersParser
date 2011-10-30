@@ -470,6 +470,96 @@ namespace BigNumbersParser
 		*this = *this % num;
 	}
 
+	bool operator==(const Integer& num1, const Integer& num2)
+	{
+		return mpz_cmp(num1.number, num2.number) == 0;
+	}
+
+	bool operator==(const Integer& num1, const int num2)
+	{
+		return mpz_cmp_si(num1.number, num2) == 0;
+	}
+
+	bool operator==(const int num1, const Integer& num2)
+	{
+		return mpz_cmp_si(num2.number, num1) == 0;
+	}
+
+	bool operator!=(const Integer& num1, const Integer& num2)
+	{
+		return mpz_cmp(num1.number, num2.number) != 0;
+	}
+
+	bool operator!=(const Integer& num1, const int num2)
+	{
+		return mpz_cmp_si(num1.number, num2) != 0;
+	}
+
+	bool operator!=(const int num1, const Integer& num2)
+	{
+		return mpz_cmp_si(num2.number, num1) == 0;
+	}
+
+	bool operator>(const Integer& num1, const Integer& num2)
+	{
+		return mpz_cmp(num1.number, num2.number) > 0;
+	}
+
+	bool operator>(const Integer& num1, const int num2)
+	{
+		return mpz_cmp_si(num1.number, num2) > 0;
+	}
+
+	bool operator>(const int num1, const Integer& num2)
+	{
+		return mpz_cmp_si(num2.number, num1) < 0;
+	}
+
+	bool operator>=(const Integer& num1, const Integer& num2)
+	{
+		return mpz_cmp(num1.number, num2.number) >= 0;
+	}
+
+	bool operator>=(const Integer& num1, const int num2)
+	{
+		return mpz_cmp_si(num1.number, num2) >= 0;
+	}
+
+	bool operator>=(const int num1, const Integer& num2)
+	{
+		return mpz_cmp_si(num2.number, num1) <= 0;
+	}
+
+	bool operator<(const Integer& num1, const Integer& num2)
+	{
+		return mpz_cmp(num1.number, num2.number) < 0;
+	}
+
+	bool operator<(const Integer& num1, const int num2)
+	{
+		return mpz_cmp_si(num1.number, num2) < 0;
+	}
+
+	bool operator<(const int num1, const Integer& num2)
+	{
+		return mpz_cmp_si(num2.number, num1) > 0;
+	}
+
+	bool operator<=(const Integer& num1, const Integer& num2)
+	{
+		return mpz_cmp(num1.number, num2.number) <= 0;
+	}
+
+	bool operator<=(const Integer& num1, const int num2)
+	{
+		return mpz_cmp_si(num1.number, num2) <= 0;
+	}
+
+	bool operator<=(const int num1, const Integer& num2)
+	{
+		return mpz_cmp_si(num2.number, num1) >= 0;
+	}
+
 	/**
 	 * = operator.
 	 * @param num Number.

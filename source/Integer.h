@@ -71,6 +71,31 @@ namespace BigNumbersParser
 		operator int() const;
 
 	public:
+		friend bool operator==(const Integer& num1, const Integer& num2);
+		friend bool operator==(const Integer& num1, const int num2);
+		friend bool operator==(const int num1, const Integer& num2);
+
+		friend bool operator!=(const Integer& num1, const Integer& num2);
+		friend bool operator!=(const Integer& num1, const int num2);
+		friend bool operator!=(const int num1, const Integer& num2);
+
+		friend bool operator>(const Integer& num1, const Integer& num2);
+		friend bool operator>(const Integer& num1, const int num2);
+		friend bool operator>(const int num1, const Integer& num2);
+
+		friend bool operator>=(const Integer& num1, const Integer& num2);
+		friend bool operator>=(const Integer& num1, const int num2);
+		friend bool operator>=(const int num1, const Integer& num2);
+
+		friend bool operator<(const Integer& num1, const Integer& num2);
+		friend bool operator<(const Integer& num1, const int num2);
+		friend bool operator<(const int num1, const Integer& num2);
+
+		friend bool operator<=(const Integer& num1, const Integer& num2);
+		friend bool operator<=(const Integer& num1, const int num2);
+		friend bool operator<=(const int num1, const Integer& num2);
+
+	public:
 		friend Integer pow(const Integer& num1, const Integer& num2);
 
 		friend Integer abs(const Integer& num);
