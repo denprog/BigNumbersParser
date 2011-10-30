@@ -29,6 +29,9 @@ namespace BigNumbersParser
 {
 	class Real;
 	
+	/**
+	 * Mathematics helper.
+	 */
 	class MathHelper
 	{
 	public:
@@ -43,9 +46,9 @@ namespace BigNumbersParser
 		static TNumber GetMisc(const TNumber& num);
 		
 	private:
-		static map<int, int> bitPrecisions;
-		static map<int, int> decimalPrecisions;
-		static map<int, Real> realMiscs;
+		static map<int, int> bitPrecisions; ///< The bit precisions cache
+		static map<int, int> decimalPrecisions; ///< The decimal precisions cache
+		static map<int, Real> realMiscs;	///< The real miscs cache
 	};
 }
 

@@ -36,6 +36,9 @@ namespace BigNumbersParser
 	template<>
 	map<string, Solver<Rational>::BuildinVariable> Solver<Rational>::buildinVariables;
 
+	/**
+	 * Visitor's functor for FunctionCallNode<Integer>.
+	 */
 	template<>
 	Integer Solver<Integer>::operator()(FunctionCallNode<Integer> const& op) const
 	{
@@ -102,6 +105,9 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Visitor's functor for FunctionCallNode<Real>.
+	 */
 	template<>
 	Real Solver<Real>::operator()(FunctionCallNode<Real> const& op) const
 	{
@@ -182,6 +188,9 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Visitor's functor for FunctionCallNode<Rational>.
+	 */
 	template<>
 	Rational Solver<Rational>::operator()(FunctionCallNode<Rational> const& op) const
 	{
@@ -248,6 +257,9 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Visitor's functor for IdentifierNode<Integer>.
+	 */
 	template<>
 	Integer Solver<Integer>::operator()(IdentifierNode<Integer> const& op) const
 	{
@@ -279,6 +291,9 @@ namespace BigNumbersParser
 		return 0;
 	}
 
+	/**
+	 * Visitor's functor for IdentifierNode<Real>.
+	 */
 	template<>
 	Real Solver<Real>::operator()(IdentifierNode<Real> const& op) const
 	{
@@ -311,6 +326,9 @@ namespace BigNumbersParser
 		return 0;
 	}
 
+	/**
+	 * Visitor's functor for IdentifierNode<Rational>.
+	 */
 	template<>
 	Rational Solver<Rational>::operator()(IdentifierNode<Rational> const& op) const
 	{

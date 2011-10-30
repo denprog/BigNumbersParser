@@ -10,6 +10,9 @@ using namespace std;
 
 namespace BigNumbersParser
 {
+	/**
+	 * Real number.
+	 */
 	class Real
 	{
 	public:
@@ -200,8 +203,6 @@ public:
 
 		friend Real round(const Real& num);
 
-		friend Real remainder(const Real& dividend, const Real& divisor);
-
 		friend Real integer(const Real& num);
 
 		friend Real fraction(const Real& num);
@@ -332,14 +333,14 @@ public:
 		Real GetNumber();
 
 	private:
-		mpfr_t number;
+		mpfr_t number;	///< The number
 		//int addPrecision;
 		string stringNumber;
 
 #ifdef TRACE_OUTPUT
 	void UpdateNumberStr();
 
-	string numberStr;
+	string numberStr; ///< The string representation of the number for debug purposes.
 #endif
 	};
 }

@@ -12,6 +12,9 @@ using namespace std;
 
 namespace BigNumbersParser
 {
+	/**
+	 * Rational number.
+	 */
 	class Rational
 	{
 	public:
@@ -99,10 +102,10 @@ namespace BigNumbersParser
 	#endif
 		
 	private:
-		mpq_t number;
+		mpq_t number; ///< The number 
 
 	#ifdef TRACE_OUTPUT
-		string numberStr;
+		string numberStr; ///< The string representation of the number for debug purposes
 	#endif
 	};
 }

@@ -12,7 +12,7 @@ namespace BigNumbersParser
 		DivisionByZero = 100, 
 		Overflow = 101, 
 		ArgumentIsOver = 102, 
-		ConversionDoesNotFits
+		ConversionDoesNotFits = 103
 	};
 	
 	struct ParserException

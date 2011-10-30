@@ -11,6 +11,11 @@ namespace BigNumbersParser
 	map<int, int> MathHelper::decimalPrecisions;
 	map<int, Real> MathHelper::realMiscs;
 	
+	/**
+	 * Converts a string to a wstring.
+	 * @param str The narrow string.
+	 * @return Wide string.
+	 */
 	wstring MathHelper::AToW(const string& str)
 	{
 		wstring res;
@@ -28,11 +33,21 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Converts a string to a wstring.
+	 * @param str The narrow string.
+	 * @return Wide string.
+	 */
 	wstring MathHelper::AToW(const char* str)
 	{
 		return AToW(string(str));
 	}
 
+	/**
+	 * Converts a wstring to a string.
+	 * @param str The wide string.
+	 * @return Narrow string.
+	 */
 	string MathHelper::WToA(const wstring& str)
 	{
 		string res;
@@ -50,6 +65,11 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Converts the decimal precision to the bit precision of the mpfr.
+	 * @param precision The decimal precision.
+	 * @return Bit precision.
+	 */
 	int MathHelper::ToBitPrecision(const int precision)
 	{
 		if (bitPrecisions[precision] != 0)
@@ -69,9 +89,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Converts the bit precision to the decimal precision.
+	 * @param precision The bit precision.
+	 * @return The decimal precision.
+	 */
 	int MathHelper::ToDecimalPrecision(const int precision)
 	{
-		//return (int)((float)precision / 4 * 1.5);
 		if (decimalPrecisions[precision] != 0)
 			return decimalPrecisions[precision];
 		
@@ -89,6 +113,11 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Gets the calculation error, which presents a number 0.00001, where the number of zeros after the point is the precision.
+	 * @param num Number.
+	 * @return The misc.
+	 */
 	template<>
 	Real MathHelper::GetMisc(const Real& num)
 	{
@@ -105,12 +134,22 @@ namespace BigNumbersParser
 		return iter->second;
 	}
 
+	/**
+	 * Gets a misc of Integer number.
+	 * @param num Number.
+	 * @return The misc of zero.
+	 */
 	template<>
 	Integer MathHelper::GetMisc(const Integer& num)
 	{
 		return Integer(0);
 	}
 
+	/**
+	 * Gets a misc of Rational number.
+	 * @param num Number.
+	 * @return The misc of zero.
+	 */
 	template<>
 	Rational MathHelper::GetMisc(const Rational& num)
 	{

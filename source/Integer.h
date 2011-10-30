@@ -10,6 +10,9 @@ using namespace std;
 
 namespace BigNumbersParser
 {
+	/**
+	 * Integer number.
+	 */
 	class Integer
 	{
 	public:
@@ -93,10 +96,10 @@ namespace BigNumbersParser
 #endif
 		
 	private:
-		mpz_t number;
+		mpz_t number; ///< The number
 
 #ifdef TRACE_OUTPUT
-		string numberStr;
+		string numberStr; ///< String representation for debug.
 #endif
 	};
 }

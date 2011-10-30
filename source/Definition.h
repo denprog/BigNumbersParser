@@ -6,9 +6,16 @@
 
 namespace BigNumbersParser
 {
+	/**
+	 * Spirit grammar for definitions.
+	 */
 	template<typename Number>
 	struct Definition : qi::grammar<string::iterator, DefinitionNode<Number>(), qi::space_type>
 	{
+		/**
+		 * Constructor.
+		 * @param [in] expr The expression.
+		 */
 		Definition(string& expr) : base_type(definition), expression(expr), returnExpression(expr)
 		{
 			using boost::spirit::qi::lit;
@@ -19,26 +26,32 @@ namespace BigNumbersParser
 			using boost::spirit::qi::on_error;
 			using boost::spirit::qi::fail;
 			
+			//the definition is a variable or a function
 			definition = 
 				variable | 
 				function;
 			
+			//the function definition
 			function = 
 				identifier >> 
 				'(' >> argumentList >> ')' >> 
 				(lit('=') >  
 				'{' > "return" > returnExpression > ';' > '}');
 			
+			//the function's argument list
 			argumentList = 
 				-(identifier % ',');
 			
+			//the variable definition
 			variable = 
 				identifier >> 
 				('=' > expression);
-				
+			
+			//identifier is a name
 			identifier = 
 				name;
 			
+			//name is a letter-numeric string with an letter in the beginning
 			name = 
 				raw[lexeme[(alpha | '_') >> *(alnum | '_')]];
 

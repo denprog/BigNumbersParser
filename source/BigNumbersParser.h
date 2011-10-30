@@ -19,11 +19,20 @@ namespace fusion = boost::fusion;
 
 namespace BigNumbersParser
 {
+	/**
+	 * Big numbers parser.
+	 */
 	template<typename Number>
 	struct Parser
 	{
 		Parser(const int precision);
 		
+		/**
+		 * Parses an expression.
+		 * @param [in,out] expression The expression.
+		 * @param precision	(optional) the precision.
+		 * @return The result.
+		 */
 		Number Parse(string& expression, const int precision = -1)
 		{
 			Number res;
@@ -40,7 +49,7 @@ namespace BigNumbersParser
 			return res;
 		}
 
-		Solver<Number> solver;
+		Solver<Number> solver;	///< The solver
 	};
 };
 

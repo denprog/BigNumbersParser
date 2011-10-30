@@ -5,6 +5,9 @@
 
 namespace BigNumbersParser
 {
+	/**
+	 * Annotation for nodes. Used in purposes of searching a node by a text position.
+	 */
 	template<typename Number>
 	struct Annotation
 	{
@@ -17,15 +20,30 @@ namespace BigNumbersParser
 			boost::recursive_wrapper<ExpressionNode<Number> > >
 			Operand;
 
+		/**
+		 * Constructor.
+		 * @param _first The beginning of the expression.
+		 * @param _last The end of the expression.
+		 */
 		Annotation(string::iterator _first, string::iterator _last) : first(_first), last(_last)
 		{
 		}
 
+		/**
+		 * Updates the position in the expression.
+		 * @param p	The iterator position.
+		 * @param [in,out] position The expression position.
+		 */
 		void UpdatePosition(string::iterator p, ExpressionPosition const& position) const
 		{
 			UpdatePosition(p, (ExpressionPosition&)position);
 		}
 		
+		/**
+		 * Updates the position in the expression.
+		 * @param p	The iterator position.
+		 * @param [in,out] position The expression position.
+		 */
 		void UpdatePosition(string::iterator p, ExpressionPosition& position) const
 		{
 			int i = 0, j = 0;
@@ -50,26 +68,51 @@ namespace BigNumbersParser
 			position.line = j;
 		}
 		
+		/**
+		 * Updates the position in the expression.
+		 * @param op The node.
+		 * @param [in] position The iterator position.
+		 */
 		void operator()(Operand& op, string::iterator pos) const
 		{
 			boost::apply_visitor(OperandVisitor<Number>(this, pos), op);
 		}
 
+		/**
+		 * Updates the position in the expression.
+		 * @param op The node.
+		 * @param [in] position The iterator position.
+		 */
 		void operator()(IdentifierNode<Number>& op, string::iterator pos) const
 		{
 			UpdatePosition(pos, op);
 		}
 
+		/**
+		 * Updates the position in the expression.
+		 * @param op The node.
+		 * @param [in] position The iterator position.
+		 */
 		void operator()(ExpressionNode<Number>& expr, string::iterator pos) const
 		{
 			UpdatePosition(pos, expr);
 		}
 
+		/**
+		 * Updates the position in the expression.
+		 * @param op The node.
+		 * @param [in] position The iterator position.
+		 */
 		void operator()(OperationNode<Number>& op, string::iterator pos) const
 		{
 			UpdatePosition(pos, op);
 		}
 
+		/**
+		 * Updates the position in the expression.
+		 * @param op The node.
+		 * @param [in] position The iterator position.
+		 */
 		void operator()(FunctionCallNode<Number>& op, string::iterator pos) const
 		{
 			UpdatePosition(pos, op);
@@ -79,36 +122,62 @@ namespace BigNumbersParser
 		//{
 		//}
 
+		/**
+		 * Operand visitor.
+		 */
 		template<typename Number>
 		struct OperandVisitor
 		{
+			/**
+			 * Constructor.
+			 * @param _annotation The annotation.
+			 * @param _iter The iterator position.
+			 */
 			OperandVisitor(Annotation<Number> const* _annotation, string::iterator _iter) : annotation(_annotation), iter(_iter)
 			{
 			}
 			
+			/**
+			 * The visitor's functor for OperationNode.
+			 */
 			void operator()(OperationNode<Number> const& op) const
 			{
 				annotation->UpdatePosition(iter, op);
 			}
 
+			/**
+			 * The visitor's functor for UnaryOperationNode.
+			 */
 			void operator()(UnaryOperationNode<Number> const& op) const
 			{
 			}
 
+			/**
+			 * The visitor's functor for IdentifierNode.
+			 */
 			void operator()(IdentifierNode<Number> const& op) const
 			{
 				annotation->UpdatePosition(iter, op);
 			}
 
+			/**
+			 * The visitor's functor for FunctionCallNode.
+			 */
 			void operator()(FunctionCallNode<Number> const& op) const
 			{
 				annotation->UpdatePosition(iter, op);
 			}
 			
+			/**
+			 * The visitor's functor for ExpressionNode.
+			 */
 			void operator()(ExpressionNode<Number> const& op) const
 			{
 			}
 
+			/**
+			 * The visitor's functor for Number.
+			 */
 			void operator()(Number const& op) const
 			{
 				//((Number)op).SetPrecision(10);

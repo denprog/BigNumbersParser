@@ -3,6 +3,9 @@
 
 namespace BigNumbersParser
 {
+	/**
+	 * Default constructor.
+	 */
 	Integer::Integer()
 	{
 		mpz_init(number);
@@ -12,6 +15,11 @@ namespace BigNumbersParser
 #endif
 	}
 
+	/**
+	 * Constructor.
+	 * @param precision The precision.
+	 * @param num Number.
+	 */
 	Integer::Integer(const int precision, const int num)
 	{
 		mpz_init(number);
@@ -22,6 +30,11 @@ namespace BigNumbersParser
 	#endif
 	}
 
+	/**
+	 * Constructor.
+	 * @param precision The precision.
+	 * @param num Number.
+	 */
 	Integer::Integer(const int precision, const double num)
 	{
 		mpz_init(number);
@@ -42,6 +55,10 @@ namespace BigNumbersParser
 	#endif
 	}
 
+	/**
+	 * Copy constructor.
+	 * @param source Source.
+	 */
 	Integer::Integer(const Integer& source)
 	{
 		mpz_init(number);
@@ -52,6 +69,10 @@ namespace BigNumbersParser
 	#endif
 	}
 
+	/**
+	 * Constructor.
+	 * @param num Number.
+	 */
 	Integer::Integer(const string& num)
 	{
 		mpz_init(number);
@@ -62,11 +83,19 @@ namespace BigNumbersParser
 	#endif
 	}
 
+	/**
+	 * Destructor.
+	 */
 	Integer::~Integer()
 	{
 		mpz_clear(number);
 	}
 
+	/**
+	 * = casting operator from Integer.
+	 * @param source Source for the operation.
+	 * @return The result of the operation.
+	 */
 	Integer& Integer::operator=(const Integer& source)
 	{
 		if (this == &source)
@@ -84,6 +113,11 @@ namespace BigNumbersParser
 		return *this;
 	}
 
+	/**
+	 * = casting operator from std::string.
+	 * @param num Number.
+	 * @return The result of the operation.
+	 */
 	Integer& Integer::operator=(const std::string& num)
 	{
 		mpz_init(number);
@@ -96,6 +130,11 @@ namespace BigNumbersParser
 		return *this;
 	}
 
+	/**
+	 * = casting operator from mpz_t.
+	 * @param source Source.
+	 * @return The result of the operation.
+	 */
 	Integer& Integer::operator=(const mpz_t& source)
 	{
 		mpz_set(number, source);
@@ -107,6 +146,10 @@ namespace BigNumbersParser
 		return *this;
 	}
 
+	/**
+	 * + casting operator.
+	 * @return The result of the operation.
+	 */
 	Integer Integer::operator+()
 	{
 		Integer res(*this);
@@ -114,6 +157,10 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * - casting operator.
+	 * @return The result of the operation.
+	 */
 	Integer Integer::operator-()
 	{
 		Integer res(*this);
@@ -123,6 +170,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Addition operator.
+	 * @param num1 The first value.
+	 * @param num2 A value to add to it.
+	 * @return The result of the operation.
+	 */
 	Integer operator+(const Integer& num1, const Integer& num2)
 	{
 		Integer res;
@@ -132,6 +185,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Addition operator.
+	 * @param num1 The first value.
+	 * @param num2 A value to add to it.
+	 * @return The result of the operation.
+	 */
 	Integer operator+(const Integer& num1, const int num2)
 	{
 		Integer res;
@@ -142,6 +201,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Addition operator.
+	 * @param num1 The first value.
+	 * @param num2 A value to add to it.
+	 * @return The result of the operation.
+	 */
 	Integer operator+(const int num1, const Integer& num2)
 	{
 		Integer res;
@@ -152,6 +217,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Subtraction operator.
+	 * @param num1 The first value.
+	 * @param num2 A value to subtract from it.
+	 * @return The result of the operation.
+	 */
 	Integer operator-(const Integer& num1, const Integer& num2)
 	{
 		Integer res;
@@ -161,6 +232,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Subtraction operator.
+	 * @param num1 The first value.
+	 * @param num2 A value to subtract from it.
+	 * @return The result of the operation.
+	 */
 	Integer operator-(const Integer& num1, const int num2)
 	{
 		Integer res;
@@ -171,6 +248,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Subtraction operator.
+	 * @param num1 The first value.
+	 * @param num2 A value to subtract from it.
+	 * @return The result of the operation.
+	 */
 	Integer operator-(const int num1, const Integer& num2)
 	{
 		Integer res;
@@ -181,6 +264,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Multiplication operator.
+	 * @param num1 The first value to multiply.
+	 * @param num2 The second value to multiply.
+	 * @return The result of the operation.
+	 */
 	Integer operator*(const Integer& num1, const Integer& num2)
 	{
 		Integer res;
@@ -190,6 +279,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Multiplication operator.
+	 * @param num1 The first value to multiply.
+	 * @param num2 The second value to multiply.
+	 * @return The result of the operation.
+	 */
 	Integer operator*(const Integer& num1, const int num2)
 	{
 		Integer res;
@@ -199,6 +294,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Multiplication operator.
+	 * @param num1 The first value to multiply.
+	 * @param num2 The second value to multiply.
+	 * @return The result of the operation.
+	 */
 	Integer operator*(const int num1, const Integer& num2)
 	{
 		Integer res;
@@ -208,6 +309,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Division operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The numerator.
+	 * @param num2 The denominator.
+	 * @return The result of the operation.
+	 */
 	Integer operator/(const Integer& num1, const Integer& num2)
 	{
 		Integer res;
@@ -221,15 +329,19 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Division operator.
+	 * @param num1 The numerator.
+	 * @param num2 The denominator.
+	 * @return The result of the operation.
+	 */
 	Integer operator/(const Integer& num1, const int num2)
 	{
 		Integer res;
 		Integer _num2(num2);
 
 		if (num2 == 0)
-		{
-			//throw MathException(MATH_ERROR_OVERFLOW);
-		}
+			throw MathException(DivisionByZero);
 
 		//mpz_div(res.number, num1.number, _num2.number);
 		mpz_divexact(res.number, num1.number, _num2.number);
@@ -237,15 +349,19 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Division operator.
+	 * @param num1 The numerator.
+	 * @param num2 The denominator.
+	 * @return The result of the operation.
+	 */
 	Integer operator/(const int num1, const Integer& num2)
 	{
 		Integer res;
 		Integer _num1(num1);
 
 		if (num2 == 0)
-		{
-			//throw MathException(MATH_ERROR_OVERFLOW);
-		}
+			throw MathException(DivisionByZero);
 
 		//mpz_div(res.number, _num1.number, num2.number);
 		mpz_divexact(res.number, _num1.number, num2.number);
@@ -253,90 +369,135 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Modulus operator.
+	 * @param num1 The numerator.
+	 * @param num2 The denominator.
+	 * @return The result of the operation.
+	 */
 	Integer operator%(const Integer& num1, const Integer& num2)
 	{
 		Integer res;
 
 		if (num2 == 0)
-		{
-			//throw MathException(MATH_ERROR_OVERFLOW);
-		}
+			throw MathException(DivisionByZero);
 
 		mpz_mod(res.number, num1.number, num2.number);
 
 		return res;
 	}
 
+	/**
+	 * Modulus operator.
+	 * @param num1 The numerator.
+	 * @param num2 The denominator.
+	 * @return The result of the operation.
+	 */
 	Integer operator%(const Integer& num1, const int num2)
 	{
 		Integer res;
 		Integer _num2(num2);
 
 		if (num2 == 0)
-		{
-			//throw MathException(MATH_ERROR_OVERFLOW);
-		}
+			throw MathException(DivisionByZero);
 
 		mpz_mod(res.number, num1.number, _num2.number);
 
 		return res;
 	}
 
+	/**
+	 * Modulus operator.
+	 * @param num1 The numerator.
+	 * @param num2 The denominator.
+	 * @return The result of the operation.
+	 */
 	Integer operator%(const int num1, const Integer& num2)
 	{
 		Integer res;
 		Integer _num1(num1);
 
 		if (num2 == 0)
-		{
-			//throw MathException(MATH_ERROR_OVERFLOW);
-		}
+			throw MathException(DivisionByZero);
 
 		mpz_mod(res.number, _num1.number, num2.number);
 
 		return res;
 	}
 
+	/**
+	 * += operator.
+	 * @param num A value to add to it.
+	 */
 	void Integer::operator+=(const Integer& num)
 	{
 		*this = *this + num;
 	}
 
+	/**
+	 * -= operator.
+	 * @param num A value to subtract from it.
+	 */
 	void Integer::operator-=(const Integer& num)
 	{
 		*this = *this - num;
 	}
 
+	/**
+	 * *= operator.
+	 * @param num A value to multiply.
+	 */
 	void Integer::operator*=(const Integer& num)
 	{
 		*this = *this * num;
 	}
 
+	/**
+	 * /= operator.
+	 * @param num The denominator.
+	 */
 	void Integer::operator/=(const Integer& num)
 	{
 		*this = *this / num;
 	}
 
+	/**
+	 * %= operator.
+	 * @param num The denominator.
+	 */
 	void Integer::operator%=(const Integer& num)
 	{
 		*this = *this % num;
 	}
 
+	/**
+	 * = operator.
+	 * @param num Number.
+	 */
 	void Integer::operator=(const int num)
 	{
 		mpz_set_si(number, num);
 	}
 
+	/**
+	 * Gets the int.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @return number of type int.
+	 */
 	Integer::operator int() const
 	{
 		if (mpz_fits_slong_p(number) == 0)
-		{
-			//throw MathException(MATH_ERROR_CONVERSION_DOES_NOT_FITS);
-		}
+			throw MathException(ConversionDoesNotFits);
 
 		return mpz_get_si(number);
 	}
 
+	/**
+	 * Power function.
+	 * @param num1 Base.
+	 * @param num2 Exponent.
+	 * @return Base raised to exponent.
+	 */
 	Integer pow(const Integer& num1, const Integer& num2)
 	{
 		Integer res;
@@ -346,6 +507,11 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Absolute number function.
+	 * @param num The argument.
+	 * @return Absolute value.
+	 */
 	Integer abs(const Integer& num)
 	{
 		Integer res;
@@ -355,6 +521,11 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Factorial function.
+	 * @param num The argument.
+	 * @return Factorial value.
+	 */
 	Integer fact(const Integer& num)
 	{
 		Integer res;
@@ -364,20 +535,36 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Gets the precision.
+	 * @return Zero.
+	 */
 	int Integer::GetPrecision() const
 	{
 		return 0;
 	}
 	
+	/**
+	 * Sets a precision.
+	 * @param precision The precision.
+	 */
 	void Integer::SetPrecision(int precision)
 	{
 	}
 
+	/**
+	 * Query if this object is nan.
+	 * @return true if nan, false if not.
+	 */
 	bool Integer::IsNan()
 	{
 		return false;
 	}
 
+	/**
+	 * Convert this number into a string representation.
+	 * @return A string representation of this number.
+	 */
 	string Integer::ToString() const
 	{
 		int len = mpz_sizeinbase(number, 10) + 1;
@@ -391,6 +578,12 @@ namespace BigNumbersParser
 	}
 
 #ifdef _DEBUG
+	/**
+	 * Convert this object into a string representation 1.23e+123.
+	 * @param exp	The exponent.
+	 * @param accuracy The accuracy.
+	 * @return A string representation of this object.
+	 */
 	string Integer::ToString(int exp, int accuracy) const
 	{
 		string res;
@@ -399,12 +592,20 @@ namespace BigNumbersParser
 	}
 #endif
 
+	/**
+	 * Initializes this number from a string.
+	 * @param str The string.
+	 * @return The number.
+	 */
 	Integer Integer::FromString(const std::string& str)
 	{
 		return Integer(str);
 	}
 
 #ifdef TRACE_OUTPUT
+	/**
+	 * Updates the numberStr field.
+	 */
 	void Integer::UpdateNumberStr()
 	{
 		numberStr = ToString();

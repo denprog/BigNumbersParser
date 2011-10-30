@@ -3,6 +3,11 @@
 
 namespace BigNumbersParser
 {
+	/**
+	 * Constructor.
+	 * @tparam BigNumbersParser::Integer Integer type of the big numbers parser.
+	 * @param precision The precision.
+	 */
 	template<>
 	Parser<BigNumbersParser::Integer>::Parser(const int precision) : solver(precision)
 	{
@@ -10,6 +15,11 @@ namespace BigNumbersParser
 		solver.AddBuildinFunction("pow", binaryFunc);
 	}
 
+	/**
+	 * Constructor.
+	 * @tparam BigNumbersParser::Real Real type of the big numbers parser.
+	 * @param precision The precision.
+	 */
 	template<>
 	Parser<BigNumbersParser::Real>::Parser(const int precision) : solver(precision)
 	{
@@ -87,6 +97,11 @@ namespace BigNumbersParser
 		solver.AddBuildinFunction("root", binaryFunc);
 	}
 
+	/**
+	 * Constructor.
+	 * @tparam BigNumbersParser::Rational Rational type of the big numbers parser.
+	 * @param precision The precision.
+	 */
 	template<>
 	Parser<BigNumbersParser::Rational>::Parser(const int precision) : solver(precision)
 	{

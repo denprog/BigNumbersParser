@@ -171,10 +171,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\source\Function.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\source\Integer.cpp"
 				>
 			</File>
@@ -196,10 +192,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\source\Solver.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\Statement.cpp"
 				>
 			</File>
 			<File
@@ -237,10 +229,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\source\Function.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\source\Integer.h"
 				>
 			</File>
@@ -266,10 +254,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\source\Solver.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\source\Statement.h"
 				>
 			</File>
 			<File

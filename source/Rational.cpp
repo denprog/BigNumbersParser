@@ -3,6 +3,9 @@
 
 namespace BigNumbersParser
 {
+	/**
+	 * Default constructor.
+	 */
 	Rational::Rational()
 	{
 		mpq_init(number);
@@ -12,6 +15,10 @@ namespace BigNumbersParser
 	#endif
 	}
 
+	/**
+	 * Copy constructor.
+	 * @param source Source.
+	 */
 	Rational::Rational(const Rational& source)
 	{
 		mpq_init(number);
@@ -22,6 +29,10 @@ namespace BigNumbersParser
 	#endif
 	}
 
+	/**
+	 * Constructor from int.
+	 * @param num Number.
+	 */
 	Rational::Rational(const int num)
 	{
 		mpq_init(number);
@@ -32,6 +43,11 @@ namespace BigNumbersParser
 	#endif
 	}
 
+	/**
+	 * Constructor from double.
+	 * @param precision The precision.
+	 * @param num	Number.
+	 */
 	Rational::Rational(const int precision, const double num)
 	{
 		mpq_init(number);
@@ -42,6 +58,11 @@ namespace BigNumbersParser
 	#endif
 	}
 
+	/**
+	 * Constructor from int.
+	 * @param precision The precision.
+	 * @param num	Number.
+	 */
 	Rational::Rational(const int precision, const int num)
 	{
 		mpq_init(number);
@@ -52,6 +73,10 @@ namespace BigNumbersParser
 	#endif
 	}
 
+	/**
+	 * Constructor from string.
+	 * @param num Number.
+	 */
 	Rational::Rational(const string& num)
 	{
 		mpq_init(number);
@@ -62,11 +87,19 @@ namespace BigNumbersParser
 	#endif
 	}
 
+	/**
+	 * Destructor.
+	 */
 	Rational::~Rational()
 	{
 		mpq_clear(number);
 	}
 		
+	/**
+	 * = casting operator.
+	 * @param source Source.
+	 * @return The result number.
+	 */
 	Rational& Rational::operator=(const Rational& source)
 	{
 		if (this == &source)
@@ -84,6 +117,11 @@ namespace BigNumbersParser
 		return *this;
 	}
 
+	/**
+	 * = casting operator.
+	 * @param source Source.
+	 * @return The result number.
+	 */
 	Rational& Rational::operator=(const string& source)
 	{
 		if (source.find(L'.') != -1)
@@ -128,6 +166,10 @@ namespace BigNumbersParser
 		return *this;
 	}
 
+	/**
+	 * + operator.
+	 * @return The result number.
+	 */
 	Rational Rational::operator+()
 	{
 		Rational res(*this);
@@ -135,6 +177,10 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * - operator.
+	 * @return The result number.
+	 */
 	Rational Rational::operator-()
 	{
 		Rational res(*this);
@@ -144,6 +190,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Addition operator.
+	 * @param num1 The first value.
+	 * @param num2 A value to add to it.
+	 * @return The result of the operation.
+	 */
 	Rational operator+(const Rational& num1, const Rational& num2)
 	{
 		Rational res;
@@ -153,6 +205,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Addition operator.
+	 * @param num1 The first value.
+	 * @param num2 A value to add to it.
+	 * @return The result of the operation.
+	 */
 	Rational operator+(const Rational& num1, const int num2)
 	{
 		Rational res;
@@ -163,6 +221,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Addition operator.
+	 * @param num1 The first value.
+	 * @param num2 A value to add to it.
+	 * @return The result of the operation.
+	 */
 	Rational operator+(const int num1, const Rational& num2)
 	{
 		Rational res;
@@ -173,6 +237,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Subtraction operator.
+	 * @param num1 The first value.
+	 * @param num2 A value to subtract from it.
+	 * @return The result of the operation.
+	 */
 	Rational operator-(const Rational& num1, const Rational& num2)
 	{
 		Rational res;
@@ -182,6 +252,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Subtraction operator.
+	 * @param num1 The first value.
+	 * @param num2 A value to subtract from it.
+	 * @return The result of the operation.
+	 */
 	Rational operator-(const Rational& num1, const int num2)
 	{
 		Rational res;
@@ -192,6 +268,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Subtraction operator.
+	 * @param num1 The first value.
+	 * @param num2 A value to subtract from it.
+	 * @return The result of the operation.
+	 */
 	Rational operator-(const int num1, const Rational& num2)
 	{
 		Rational res;
@@ -202,6 +284,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Multiplication operator.
+	 * @param num1 The first value to multiply.
+	 * @param num2 The second value to multiply.
+	 * @return The result of the operation.
+	 */
 	Rational operator*(const Rational& num1, const Rational& num2)
 	{
 		Rational res;
@@ -211,6 +299,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Multiplication operator.
+	 * @param num1 The first value to multiply.
+	 * @param num2 The second value to multiply.
+	 * @return The result of the operation.
+	 */
 	Rational operator*(const Rational& num1, const int num2)
 	{
 		Rational res;
@@ -221,6 +315,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Multiplication operator.
+	 * @param num1 The first value to multiply.
+	 * @param num2 The second value to multiply.
+	 * @return The result of the operation.
+	 */
 	Rational operator*(const int num1, const Rational& num2)
 	{
 		Rational res;
@@ -231,145 +331,276 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Division operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The numerator.
+	 * @param num2 The denominator.
+	 * @return The result of the operation.
+	 */
 	Rational operator/(const Rational& num1, const Rational& num2)
 	{
 		Rational res;
 
 		if (num2 == 0)
-		{
-		//	throw MathException(MATH_ERROR_OVERFLOW);
-		}
+			throw MathException(DivisionByZero);
 
 		mpq_div(res.number, num1.number, num2.number);
 
 		return res;
 	}
 
+	/**
+	 * Division operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The numerator.
+	 * @param num2 The denominator.
+	 * @return The result of the operation.
+	 */
 	Rational operator/(const Rational& num1, const int num2)
 	{
 		Rational res;
 		Rational _num2(num2);
 
 		if (num2 == 0)
-		{
-		//	throw MathException(MATH_ERROR_OVERFLOW);
-		}
+			throw MathException(DivisionByZero);
 
 		mpq_div(res.number, num1.number, _num2.number);
 
 		return res;
 	}
 
+	/**
+	 * Division operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The numerator.
+	 * @param num2 The denominator.
+	 * @return The result of the operation.
+	 */
 	Rational operator/(const int num1, const Rational& num2)
 	{
 		Rational res;
 		Rational _num1(num1);
 
 		if (num2 == 0)
-		{
-		//	throw MathException(MATH_ERROR_OVERFLOW);
-		}
+			throw MathException(DivisionByZero);
 
 		mpq_div(res.number, _num1.number, num2.number);
 
 		return res;
 	}
 
+	/**
+	 * += operator.
+	 * @param num A value to add to it.
+	 */
 	void Rational::operator+=(const Rational& num)
 	{
 		*this = *this + num;
 	}
 
+	/**
+	 * Equality operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the parameters are considered equivalent.
+	 */
 	bool operator==(const Rational& num1, const Rational& num2)
 	{
 		return mpq_cmp(num1.number, num2.number) == 0;
 	}
 
+	/**
+	 * Equality operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the parameters are considered equivalent.
+	 */
 	bool operator==(const Rational& num1, const int num2)
 	{
 		return mpq_cmp_si(num1.number, num2, 1) == 0;
 	}
 
+	/**
+	 * Equality operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the parameters are considered equivalent.
+	 */
 	bool operator==(const int num1, const Rational& num2)
 	{
 		return mpq_cmp_si(num2.number, num1, 1) == 0;
 	}
 
+	/**
+	 * Not equality operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the parameters are not considered equivalent.
+	 */
 	bool operator!=(const Rational& num1, const Rational& num2)
 	{
 		return mpq_cmp(num1.number, num2.number) != 0;
 	}
 
+	/**
+	 * Not equality operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the parameters are not considered equivalent.
+	 */
 	bool operator!=(const Rational& num1, const int num2)
 	{
 		return mpq_cmp_si(num1.number, num2, 1) != 0;
 	}
 
+	/**
+	 * Not equality operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the parameters are not considered equivalent.
+	 */
 	bool operator!=(const int num1, const Rational& num2)
 	{
 		return mpq_cmp_si(num2.number, num1, 1) == 0;
 	}
 
+	/**
+	 * Greater-than comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is greater than to the second.
+	 */
 	bool operator>(const Rational& num1, const Rational& num2)
 	{
 		return mpq_cmp(num1.number, num2.number) > 0;
 	}
 
+	/**
+	 * Greater-than comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is greater than to the second.
+	 */
 	bool operator>(const Rational& num1, const int num2)
 	{
 		return mpq_cmp_si(num1.number, num2, 1) > 0;
 	}
 
+	/**
+	 * Greater-than comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is greater than to the second.
+	 */
 	bool operator>(const int num1, const Rational& num2)
 	{
 		return mpq_cmp_si(num2.number, num1, 1) < 0;
 	}
 
+	/**
+	 * Greater-than-or-equal comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is greater than or equal to the second.
+	 */
 	bool operator>=(const Rational& num1, const Rational& num2)
 	{
 		return mpq_cmp(num1.number, num2.number) >= 0;
 	}
 
+	/**
+	 * Greater-than-or-equal comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is greater than or equal to the second.
+	 */
 	bool operator>=(const Rational& num1, const int num2)
 	{
 		return mpq_cmp_si(num1.number, num2, 1) >= 0;
 	}
 
+	/**
+	 * Greater-than-or-equal comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is greater than or equal to the second.
+	 */
 	bool operator>=(const int num1, const Rational& num2)
 	{
 		return mpq_cmp_si(num2.number, num1, 1) <= 0;
 	}
 
+	/**
+	 * Less-than comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is less than the second.
+	 */
 	bool operator<(const Rational& num1, const Rational& num2)
 	{
 		return mpq_cmp(num1.number, num2.number) < 0;
 	}
 
+	/**
+	 * Less-than comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is less than the second.
+	 */
 	bool operator<(const Rational& num1, const int num2)
 	{
 		return mpq_cmp_si(num1.number, num2, 1) < 0;
 	}
 
+	/**
+	 * Less-than comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is less than the second.
+	 */
 	bool operator<(const int num1, const Rational& num2)
 	{
 		return mpq_cmp_si(num2.number, num1, 1) > 0;
 	}
 
+	/**
+	 * Less-than-or-equal comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is less than or equal to the second.
+	 */
 	bool operator<=(const Rational& num1, const Rational& num2)
 	{
 		return mpq_cmp(num1.number, num2.number) <= 0;
 	}
 
+	/**
+	 * Less-than-or-equal comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is less than or equal to the second.
+	 */
 	bool operator<=(const Rational& num1, const int num2)
 	{
 		return mpq_cmp_si(num1.number, num2, 1) <= 0;
 	}
 
+	/**
+	 * Less-than-or-equal comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is less than or equal to the second.
+	 */
 	bool operator<=(const int num1, const Rational& num2)
 	{
 		return mpq_cmp_si(num2.number, num1, 1) >= 0;
 	}
 
+	/**
+	 * Gets the numerator of the number.
+	 * @return The numerator.
+	 */
 	Integer Rational::GetNumerator()
 	{
 		Integer numerator;
@@ -382,6 +613,10 @@ namespace BigNumbersParser
 		return numerator;
 	}
 	
+	/**
+	 * Gets the denomerator of the number.
+	 * @return The denomerator.
+	 */
 	Integer Rational::GetDenomerator()
 	{
 		Integer denomerator;
@@ -394,6 +629,10 @@ namespace BigNumbersParser
 		return denomerator;
 	}
 
+	/**
+	 * Convert this number into a string representation.
+	 * @return A string representation of this number.
+	 */
 	string Rational::ToString() const
 	{
 		char* tmp = (char*)malloc(mpz_sizeinbase(mpq_numref(number), 10) + 
@@ -407,6 +646,9 @@ namespace BigNumbersParser
 	}
 
 	#ifdef TRACE_OUTPUT
+	/**
+	 * Updates the numberStr field.
+	 */
 	void Rational::UpdateNumberStr()
 	{
 		numberStr = ToString();

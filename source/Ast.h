@@ -19,6 +19,9 @@ namespace BigNumbersParser
 	template<typename Number>
 	struct ExpressionNode;
 
+	/**
+	 * Expression position.
+	 */
 	struct ExpressionPosition
 	{
 		ExpressionPosition()
@@ -27,16 +30,22 @@ namespace BigNumbersParser
 			line = -1;
 		}
 		
-		int pos;
-		int line;
+		int pos; ///< The position in a line
+		int line; ///< The line number
 	};
 	
+	/**
+	 * Identifier node.
+	 */
 	template<typename Number>
 	struct IdentifierNode : public ExpressionPosition
 	{
 		std::string name;
 	};
 
+	/**
+	 * Unary operation node.
+	 */
 	template<typename Number>
 	struct UnaryOperationNode
 	{
@@ -53,6 +62,9 @@ namespace BigNumbersParser
 		Operand operand;
 	};
 	
+	/**
+	 * Operation node.
+	 */
 	template<typename Number>
 	struct OperationNode : ExpressionPosition
 	{
@@ -69,6 +81,9 @@ namespace BigNumbersParser
 		Operand operand;
 	};
 	
+	/**
+	 * Variable node.
+	 */
 	template<typename Number>
 	struct VariableNode
 	{
@@ -76,6 +91,9 @@ namespace BigNumbersParser
 		ExpressionNode<Number> expression;
 	};
 	
+	/**
+	 * Function node.
+	 */
 	template<typename Number>
 	struct FunctionNode
 	{
@@ -84,6 +102,9 @@ namespace BigNumbersParser
 		ExpressionNode<Number> returnExpression;
 	};
 
+	/**
+	 * Definition node.
+	 */
 	template<typename Number>
 	struct DefinitionNode
 	{
@@ -95,6 +116,9 @@ namespace BigNumbersParser
 		Definition definition;
 	};
 	
+	/**
+	 * Function call node.
+	 */
 	template<typename Number>
 	struct FunctionCallNode : ExpressionPosition
 	{
@@ -102,6 +126,9 @@ namespace BigNumbersParser
 		std::list<ExpressionNode<Number> > arguments;
 	};
 	
+	/**
+	 * Expression node.
+	 */
 	template<typename Number>
 	struct ExpressionNode : ExpressionPosition
 	{
@@ -119,6 +146,9 @@ namespace BigNumbersParser
 		std::list<OperationNode<Number> > rest;
 	};
 	
+	/**
+	 * Script node.
+	 */
 	template<typename Number>
 	struct ScriptNode
 	{

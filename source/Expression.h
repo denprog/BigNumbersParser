@@ -3,13 +3,14 @@
 
 #include "stdafx.h"
 #include "ast.h"
-#include "Function.h"
-#include "Statement.h"
 #include "ErrorHandler.h"
 #include "Annotation.h"
 
 namespace BigNumbersParser
 {
+	/**
+	 * Spirit grammar for expression.
+	 */
 	template<typename Number>
 	struct Expression : qi::grammar<string::iterator, ExpressionNode<Number>(), qi::space_type>
 	{

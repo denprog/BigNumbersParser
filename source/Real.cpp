@@ -3,19 +3,23 @@
 
 namespace BigNumbersParser
 {
-	//Real
-
+	/**
+	 * Default constructor.
+	 */
 	Real::Real()
 	{
 		mpfr_init2(number, mpfr_get_default_prec());
 		mpfr_set_si(number, 0, GMP_RNDN);
-		//addPrecision = 0;
 
 #ifdef TRACE_OUTPUT
 		UpdateNumberStr();
 #endif
 	}
 
+	/**
+	 * Constructor.
+	 * @param precision The precision.
+	 */
 	Real::Real(int precision)
 	{
 		mpfr_init2(number, max((int)mpfr_get_default_prec(), precision));
@@ -28,6 +32,11 @@ namespace BigNumbersParser
 #endif
 	}
 
+	/**
+	 * Constructor from char*.
+	 * @param precision The precision.
+	 * @param num	The number.
+	 */
 	Real::Real(int precision, const char* num)
 	{
 		mpfr_init2(number, max((int)mpfr_get_default_prec(), precision));
@@ -46,6 +55,11 @@ namespace BigNumbersParser
 #endif
 	}
 
+	/**
+	 * Constructor from int.
+	 * @param precision The precision.
+	 * @param num	The number.
+	 */
 	Real::Real(int precision, int num)
 	{
 		mpfr_init2(number, max((int)mpfr_get_default_prec(), precision));
@@ -58,6 +72,11 @@ namespace BigNumbersParser
 #endif
 	}
 
+	/**
+	 * Constructor from float.
+	 * @param precision The precision.
+	 * @param num	The number.
+	 */
 	Real::Real(int precision, float num)
 	{
 		mpfr_init2(number, max((int)mpfr_get_default_prec(), precision));
@@ -70,69 +89,25 @@ namespace BigNumbersParser
 #endif
 	}
 
+	/**
+	 * Constructor from string.
+	 * @param num The number.
+	 */
 	Real::Real(const string& num)
 	{
-		////mpz_t t;
-		////mpz_init(t);
-		//string s = num;
-		//int p = s.find('.');
-		//s = num.substr(0, p) + num.substr(p + 1, num.size() - p - 1);
-		////mpz_set_str(t, s.c_str(), 10);
-
-		////mpfr_init2(number, mpf_get_default_prec());
-		//mpfr_init2(number, max((int)mpfr_get_default_prec(), MathHelper::ToBitPrecision(num.length())) + 1);
-		////mpfr_init2(number, MathHelper::ToBitPrecision(num.length()) + 1);
-		//mpfr_set_str(number, s.c_str(), DEFAULT_BASE, MPFR_RNDA);
-		//
-		////int m = 1;
-		////for (int i = 0; i < num.size() - p - 1; ++i)
-		////	m *= 10;
-		////mpfr_div_si(number, number, m, DEFAULT_RND);
-		//mpfr_set_exp(number, 2);
-
-		//char buf[100];
-		//mpf_t n, n1, n2;
-		//mpf_init2(n, 100);
-		//mpf_init2(n1, 100);
-		//mpf_init2(n2, 100);
-		//mpf_set_str(n1, "3.456789", 10);
-		//mpf_set_str(n2, "5.345677657", 10);
-		//mpf_div(n, n1, n2);
-		//gmp_sprintf(buf, "%.Fe", n);
-
-		//mpfr_init2(number, max((int)mpfr_get_default_prec(), MathHelper::ToBitPrecision(num.length() * 5)) + 1);
-		//int r = mpfr_set_str(number, "5.3456776570000000000000000000000000", 10, MPFR_RNDA);
-		
-		//mpfr_t n1, n2, n3;
-		//
-		//mpfr_init2(n1, 200);
-		//mpfr_init2(n2, 200);
-		//mpfr_init2(n3, 200);
-		//
-		//mpfr_set_str(n1, "3.456789", 10, MPFR_RNDA);
-		//mpfr_set_str(n2, "5.345677657", 10, MPFR_RNDA);
-		//mpfr_div(n3, n1, n2, MPFR_RNDA);
-		//
-		//mp_exp_t exp;
-		//char* str = mpfr_get_str(NULL, &exp, 10, 0, n3, MPFR_RNDA);
-		
 		stringNumber = num;
 		mpfr_init2(number, max((int)mpfr_get_default_prec(), MathHelper::ToBitPrecision(num.length() * 2)) + 1);
-		int r = mpfr_set_str(number, num.c_str(), DEFAULT_BASE, MPFR_RNDA);
-		//Round(max((int)mpfr_get_default_prec(), MathHelper::ToBitPrecision(num.length() + 1)));
-		
-		//addPrecision = num.find('.');
-		//if (addPrecision == -1)
-		//	addPrecision = num.size();
+		mpfr_set_str(number, num.c_str(), DEFAULT_BASE, MPFR_RNDA);
 
 #ifdef TRACE_OUTPUT
 		UpdateNumberStr();
 #endif
-
-		//Round(MathHelper::ToBitPrecision(num.length() + 1));
-		//Round(max((int)mpfr_get_default_prec(), MathHelper::ToBitPrecision(num.length() + 1)));
 	}
 
+	/**
+	 * Copy constructor.
+	 * @param source The source number.
+	 */
 	Real::Real(const Real& source)
 	{
 		mpfr_init2(number, source.GetBitPrecision());
@@ -145,11 +120,19 @@ namespace BigNumbersParser
 #endif
 	}
 
+	/**
+	 * Destructor.
+	 */
 	Real::~Real()
 	{
 		mpfr_clear(number);
 	}
 
+	/**
+	 * = operator.
+	 * @param source Source for the number.
+	 * @return The result number.
+	 */
 	Real& Real::operator=(const Real& source)
 	{
 		if (this == &source)
@@ -168,6 +151,11 @@ namespace BigNumbersParser
 		return *this;
 	}
 
+	/**
+	 * = operator from int.
+	 * @param num The number.
+	 * @return The result number.
+	 */
 	Real& Real::operator=(const int num)
 	{
 		mpfr_set_si(number, num, GMP_RNDN);
@@ -180,6 +168,11 @@ namespace BigNumbersParser
 		return *this;
 	}
 
+	/**
+	 * = operator from double.
+	 * @param num The number.
+	 * @return The result number.
+	 */
 	Real& Real::operator=(const double num)
 	{
 		mpfr_set_d(number, num, GMP_RNDN);
@@ -192,6 +185,11 @@ namespace BigNumbersParser
 		return *this;
 	}
 
+	/**
+	 * = operator from char*.
+	 * @param num The number.
+	 * @return The result number.
+	 */
 	Real& Real::operator=(const char* num)
 	{
 		mpfr_t t;
@@ -207,11 +205,6 @@ namespace BigNumbersParser
 			mpfr_clear(t);
 		}
 
-		//addPrecision = (int)strchr(num, '.');
-		//if (!addPrecision)
-		//	addPrecision = strlen(num);
-		//else
-		//	addPrecision -= (int)num;
 		stringNumber = num;
 
 #ifdef TRACE_OUTPUT
@@ -221,6 +214,11 @@ namespace BigNumbersParser
 		return *this;
 	}
 
+	/**
+	 * = operator from std::string.
+	 * @param num The number.
+	 * @return The result number.
+	 */
 	Real& Real::operator=(const string& num)
 	{
 		mpfr_t t;
@@ -243,9 +241,6 @@ namespace BigNumbersParser
 			mpfr_clear(t);
 		}
 
-		//addPrecision = num.find('.');
-		//if (addPrecision == -1)
-		//	addPrecision = num.size();
 		stringNumber = num;
 
 #ifdef TRACE_OUTPUT
@@ -255,11 +250,19 @@ namespace BigNumbersParser
 		return *this;
 	}
 
+	/**
+	 * + operator.
+	 * @return The result number.
+	 */
 	Real Real::operator+()
 	{
 		return *this;
 	}
 
+	/**
+	 * - operator.
+	 * @return The result number.
+	 */
 	Real Real::operator-()
 	{
 		Real res(GetBitPrecision());
@@ -269,6 +272,10 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * ++ operator.
+	 * @return The result number.
+	 */
 	Real Real::operator++()
 	{
 		*this += 1;
@@ -276,6 +283,10 @@ namespace BigNumbersParser
 		return *this;
 	}
 
+	/**
+	 * -- operator.
+	 * @return The result number.
+	 */
 	Real Real::operator--()
 	{
 		*this -= 1;
@@ -283,6 +294,13 @@ namespace BigNumbersParser
 		return *this;
 	}
 
+	/**
+	 * Addition operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first value.
+	 * @param num2 A value to add to it.
+	 * @return The result of the operation.
+	 */
 	Real operator+(const Real& num1, const Real& num2)
 	{
 		Real res(max(num1.GetBitPrecision() + 2, num2.GetBitPrecision()) + 2);
@@ -298,6 +316,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Addition operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first value.
+	 * @param num2 A value to add to it.
+	 * @return The result of the operation.
+	 */
 	Real operator+(const Real& num1, const int num2)
 	{
 		Real res(num1.GetBitPrecision());
@@ -313,6 +338,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Addition operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first value.
+	 * @param num2 A value to add to it.
+	 * @return The result of the operation.
+	 */
 	Real operator+(const int num1, const Real& num2)
 	{
 		Real res(num2.GetBitPrecision());
@@ -328,6 +360,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Addition operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first value.
+	 * @param num2 A value to add to it.
+	 * @return The result of the operation.
+	 */
 	Real operator+(const Real& num1, const float num2)
 	{
 		Real res(num1.GetBitPrecision());
@@ -343,6 +382,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Addition operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first value.
+	 * @param num2 A value to add to it.
+	 * @return The result of the operation.
+	 */
 	Real operator+(const float num1, const Real& num2)
 	{
 		Real res(num2.GetBitPrecision());
@@ -358,6 +404,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Subtraction operator.
+	 * @param num1 The first value.
+	 * @param num2 A value to subtract from it.
+	 * @return The result of the operation.
+	 */
 	Real operator-(const Real& num1, const Real& num2)
 	{
 		Real res(max(num1.GetBitPrecision(), num2.GetBitPrecision()) + 1);
@@ -371,6 +423,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Subtraction operator.
+	 * @param num1 The first value.
+	 * @param num2 A value to subtract from it.
+	 * @return The result of the operation.
+	 */
 	Real operator-(const Real& num1, const int num2)
 	{
 		Real res(num1.GetBitPrecision());
@@ -380,6 +438,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Subtraction operator.
+	 * @param num1 The first value.
+	 * @param num2 A value to subtract from it.
+	 * @return The result of the operation.
+	 */
 	Real operator-(const int num1, const Real& num2)
 	{
 		Real res(num2.GetBitPrecision());
@@ -389,6 +453,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Subtraction operator.
+	 * @param num1 The first value.
+	 * @param num2 A value to subtract from it.
+	 * @return The result of the operation.
+	 */
 	Real operator-(const Real& num1, const float num2)
 	{
 		Real res(num1.GetBitPrecision());
@@ -398,6 +468,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Subtraction operator.
+	 * @param num1 The first value.
+	 * @param num2 A value to subtract from it.
+	 * @return The result of the operation.
+	 */
 	Real operator-(const float num1, const Real& num2)
 	{
 		Real res(num2.GetBitPrecision());
@@ -407,6 +483,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Multiplication operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first value to multiply.
+	 * @param num2 The second value to multiply.
+	 * @return The result of the operation.
+	 */
 	Real operator*(const Real& num1, const Real& num2)
 	{
 		Real res(max(num1.GetBitPrecision() * 2, num2.GetBitPrecision()) * 2);
@@ -422,6 +505,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Multiplication operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first value to multiply.
+	 * @param num2 The second value to multiply.
+	 * @return The result of the operation.
+	 */
 	Real operator*(const Real& num1, const int num2)
 	{
 		Real res(num1.GetBitPrecision());
@@ -437,6 +527,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Multiplication operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first value to multiply.
+	 * @param num2 The second value to multiply.
+	 * @return The result of the operation.
+	 */
 	Real operator*(const int num1, const Real& num2)
 	{
 		Real res(num2.GetBitPrecision());
@@ -452,6 +549,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Multiplication operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first value to multiply.
+	 * @param num2 The second value to multiply.
+	 * @return The result of the operation.
+	 */
 	Real operator*(const Real& num1, const float num2)
 	{
 		Real res(num1.GetBitPrecision());
@@ -467,6 +571,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Multiplication operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first value to multiply.
+	 * @param num2 The second value to multiply.
+	 * @return The result of the operation.
+	 */
 	Real operator*(const float num1, const Real& num2)
 	{
 		Real res(num2.GetBitPrecision());
@@ -482,6 +593,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Division operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The numerator.
+	 * @param num2 The denominator.
+	 * @return The result of the operation.
+	 */
 	Real operator/(const Real& num1, const Real& num2)
 	{
 		Real res(max(num1.GetBitPrecision() + 2, num2.GetBitPrecision() + 2));
@@ -498,6 +616,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Division operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The numerator.
+	 * @param num2 The denominator.
+	 * @return The result of the operation.
+	 */
 	Real operator/(const Real& num1, const int num2)
 	{
 		Real res(num1.GetBitPrecision());
@@ -510,6 +635,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Division operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The numerator.
+	 * @param num2 The denominator.
+	 * @return The result of the operation.
+	 */
 	Real operator/(const int num1, const Real& num2)
 	{
 		Real res(num2.GetBitPrecision());
@@ -522,6 +654,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Division operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The numerator.
+	 * @param num2 The denominator.
+	 * @return The result of the operation.
+	 */
 	Real operator/(const Real& num1, const float num2)
 	{
 		Real res(num1.GetBitPrecision());
@@ -534,6 +673,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Division operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The numerator.
+	 * @param num2 The denominator.
+	 * @return The result of the operation.
+	 */
 	Real operator/(const float num1, const Real& num2)
 	{
 		Real res(num2.GetBitPrecision());
@@ -546,66 +692,119 @@ namespace BigNumbersParser
 		return res;
 	}
 	
+	/**
+	 * += operator.
+	 * @param num A value to add to it.
+	 */
 	void Real::operator+=(const Real& num)
 	{
 		*this = *this + num;
 	}
 
+	/**
+	 * += operator.
+	 * @param num A value to add to it.
+	 */
 	void Real::operator+=(const int num)
 	{
 		*this = *this + num;
 	}
 
+	/**
+	 * += operator.
+	 * @param num A value to add to it.
+	 */
 	void Real::operator+=(const float num)
 	{
 		*this = *this + num;
 	}
 
+	/**
+	 * -= operator.
+	 * @param num A value to subtract from it.
+	 */
 	void Real::operator-=(const Real& num)
 	{
 		*this = *this - num;
 	}
 
+	/**
+	 * -= operator.
+	 * @param num A value to subtract from it.
+	 */
 	void Real::operator-=(const int num)
 	{
 		*this = *this - num;
 	}
 
+	/**
+	 * -= operator.
+	 * @param num A value to subtract from it.
+	 */
 	void Real::operator-=(const float num)
 	{
 		*this = *this - num;
 	}
 
+	/**
+	 * *= operator.
+	 * @param num A value to multiply.
+	 */
 	void Real::operator*=(const Real& num)
 	{
 		*this = *this * num;
 	}
 
+	/**
+	 * *= operator.
+	 * @param num A value to multiply.
+	 */
 	void Real::operator*=(const int num)
 	{
 		*this = *this * num;
 	}
 
+	/**
+	 * *= operator.
+	 * @param num A value to multiply.
+	 */
 	void Real::operator*=(const float num)
 	{
 		*this = *this * num;
 	}
 
+	/**
+	 * /= operator.
+	 * @param num The denominator.
+	 */
 	void Real::operator/=(const Real& num)
 	{
 		*this = *this / num;
 	}
 
+	/**
+	 * /= operator.
+	 * @param num The denominator.
+	 */
 	void Real::operator/=(const int num)
 	{
 		*this = *this / num;
 	}
 
+	/**
+	 * /= operator.
+	 * @param num The denominator.
+	 */
 	void Real::operator/=(const float num)
 	{
 		*this = *this / num;
 	}
 
+	/**
+	 * Gets the int.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @return number of type int.
+	 */
 	Real::operator int() const
 	{
 		if (IsInteger())
@@ -614,6 +813,13 @@ namespace BigNumbersParser
 			throw MathException(ConversionDoesNotFits);
 	}
 
+	/**
+	 * Equality operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the parameters are considered equivalent.
+	 */
 	bool operator==(const Real& num1, const Real& num2)
 	{
 		if (num1.IsNaN() || num2.IsNaN())
@@ -622,6 +828,13 @@ namespace BigNumbersParser
 		return mpfr_equal_p(num1.number, num2.number) != 0;
 	}
 
+	/**
+	 * Equality operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the parameters are considered equivalent.
+	 */
 	bool operator==(const Real& num1, const int num2)
 	{
 		if (num1.IsNaN())
@@ -630,6 +843,13 @@ namespace BigNumbersParser
 		return mpfr_cmp_si(num1.number, num2) == 0;
 	}
 
+	/**
+	 * Equality operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the parameters are considered equivalent.
+	 */
 	bool operator==(const int num1, const Real& num2)
 	{
 		if (num2.IsNaN())
@@ -638,6 +858,13 @@ namespace BigNumbersParser
 		return mpfr_cmp_si(num2.number, num1) == 0;
 	}
 
+	/**
+	 * Equality operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the parameters are considered equivalent.
+	 */
 	bool operator==(const Real& num1, const float num2)
 	{
 		if (num1.IsNaN())
@@ -646,6 +873,13 @@ namespace BigNumbersParser
 		return mpfr_cmp_d(num1.number, num2) == 0;
 	}
 
+	/**
+	 * Equality operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the parameters are considered equivalent.
+	 */
 	bool operator==(const float num1, const Real& num2)
 	{
 		if (num2.IsNaN())
@@ -654,6 +888,13 @@ namespace BigNumbersParser
 		return mpfr_cmp_d(num2.number, num1) == 0;
 	}
 
+	/**
+	 * Equality operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the parameters are considered equivalent.
+	 */
 	bool operator==(const Real& num1, const double num2)
 	{
 		if (num1.IsNaN())
@@ -662,6 +903,13 @@ namespace BigNumbersParser
 		return mpfr_cmp_d(num1.number, num2) == 0;
 	}
 
+	/**
+	 * Equality operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the parameters are considered equivalent.
+	 */
 	bool operator==(const double num1, const Real& num2)
 	{
 		if (num2.IsNaN())
@@ -670,16 +918,35 @@ namespace BigNumbersParser
 		return mpfr_cmp_d(num2.number, num1) == 0;
 	}
 
+	/**
+	 * Equality operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the parameters are considered equivalent.
+	 */
 	bool operator==(const Real& num1, const char* num2)
 	{
 		return num1 == Real(num1.GetBitPrecision(), num2);
 	}
 
+	/**
+	 * Equality operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the parameters are considered equivalent.
+	 */
 	bool operator==(const char* num1, const Real& num2)
 	{
 		return Real(num2.GetBitPrecision(), num1) == num2;
 	}
 
+	/**
+	 * Not equality operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the parameters are not considered equivalent.
+	 */
 	bool operator!=(const Real& num1, const Real& num2)
 	{
 		if (num1.IsNaN() || num2.IsNaN())
@@ -688,6 +955,13 @@ namespace BigNumbersParser
 		return mpfr_equal_p(num1.number, num2.number) == 0;
 	}
 
+	/**
+	 * Not equality operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the parameters are not considered equivalent.
+	 */
 	bool operator!=(const Real& num1, const int num2)
 	{
 		if (num1.IsNaN())
@@ -696,6 +970,13 @@ namespace BigNumbersParser
 		return mpfr_cmp_si(num1.number, num2) != 0;
 	}
 
+	/**
+	 * Not equality operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the parameters are not considered equivalent.
+	 */
 	bool operator!=(const int num1, const Real& num2)
 	{
 		if (num2.IsNaN())
@@ -704,6 +985,13 @@ namespace BigNumbersParser
 		return mpfr_cmp_si(num2.number, num1) != 0;
 	}
 
+	/**
+	 * Not equality operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the parameters are not considered equivalent.
+	 */
 	bool operator!=(const Real& num1, const float num2)
 	{
 		if (num1.IsNaN())
@@ -712,6 +1000,13 @@ namespace BigNumbersParser
 		return mpfr_cmp_d(num1.number, num2) != 0;
 	}
 
+	/**
+	 * Not equality operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the parameters are not considered equivalent.
+	 */
 	bool operator!=(const float num1, const Real& num2)
 	{
 		if (num2.IsNaN())
@@ -720,6 +1015,13 @@ namespace BigNumbersParser
 		return mpfr_cmp_d(num2.number, num1) != 0;
 	}
 
+	/**
+	 * Greater-than comparison operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is greater than to the second.
+	 */
 	bool operator>(const Real& num1, const Real& num2)
 	{
 		if (num1.IsNaN() || num2.IsNaN())
@@ -728,6 +1030,13 @@ namespace BigNumbersParser
 		return mpfr_greater_p(num1.number, num2.number) != 0;
 	}
 
+	/**
+	 * Greater-than comparison operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is greater than to the second.
+	 */
 	bool operator>(const Real& num1, const int num2)
 	{
 		if (num1.IsNaN())
@@ -736,6 +1045,12 @@ namespace BigNumbersParser
 		return mpfr_cmp_si(num1.number, num2) > 0;
 	}
 
+	/**
+	 * Greater-than comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is greater than to the second.
+	 */
 	bool operator>(const int num1, const Real& num2)
 	{
 		Real _num1(num2.GetBitPrecision(), num1);
@@ -743,6 +1058,13 @@ namespace BigNumbersParser
 		return _num1 > num2;
 	}
 
+	/**
+	 * Greater-than comparison operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is greater than to the second.
+	 */
 	bool operator>(const Real& num1, const float num2)
 	{
 		if (num1.IsNaN())
@@ -751,6 +1073,12 @@ namespace BigNumbersParser
 		return mpfr_cmp_d(num1.number, num2) > 0;
 	}
 
+	/**
+	 * Greater-than comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is greater than to the second.
+	 */
 	bool operator>(const float num1, const Real& num2)
 	{
 		Real _num1(num2.GetBitPrecision(), num1);
@@ -758,6 +1086,13 @@ namespace BigNumbersParser
 		return _num1 > num2;
 	}
 
+	/**
+	 * Greater-than-or-equal comparison operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is greater than or equal to the second.
+	 */
 	bool operator>=(const Real& num1, const Real& num2)
 	{
 		if (num1.IsNaN() || num2.IsNaN())
@@ -766,26 +1101,57 @@ namespace BigNumbersParser
 		return mpfr_greaterequal_p(num1.number, num2.number) != 0;
 	}
 
+	/**
+	 * Greater-than-or-equal comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is greater than or equal to the second.
+	 */
 	bool operator>=(const Real& num1, const int num2)
 	{
 		return (num1 > num2) || (num1 == num2);
 	}
 
+	/**
+	 * Greater-than-or-equal comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is greater than or equal to the second.
+	 */
 	bool operator>=(const int num1, const Real& num2)
 	{
 		return (num1 > num2) || (num1 == num2);
 	}
 
+	/**
+	 * Greater-than-or-equal comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is greater than or equal to the second.
+	 */
 	bool operator>=(const Real& num1, const float num2)
 	{
 		return (num1 > num2) || (num1 == num2);
 	}
 
+	/**
+	 * Greater-than-or-equal comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is greater than or equal to the second.
+	 */
 	bool operator>=(const float num1, const Real& num2)
 	{
 		return (num1 > num2) || (num1 == num2);
 	}
 
+	/**
+	 * Less-than comparison operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is less than the second.
+	 */
 	bool operator<(const Real& num1, const Real& num2)
 	{
 		if (num1.IsNaN() || num2.IsNaN())
@@ -794,6 +1160,13 @@ namespace BigNumbersParser
 		return mpfr_less_p(num1.number, num2.number) != 0;
 	}
 
+	/**
+	 * Less-than comparison operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is less than the second.
+	 */
 	bool operator<(const Real& num1, const int num2)
 	{
 		if (num1.IsNaN())
@@ -802,6 +1175,12 @@ namespace BigNumbersParser
 		return mpfr_cmp_si(num1.number, num2) < 0;
 	}
 
+	/**
+	 * Less-than comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is less than the second.
+	 */
 	bool operator<(const int num1, const Real& num2)
 	{
 		Real _num1(num2.GetBitPrecision(), num1);
@@ -809,6 +1188,13 @@ namespace BigNumbersParser
 		return _num1 < num2;
 	}
 
+	/**
+	 * Less-than comparison operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is less than the second.
+	 */
 	bool operator<(const Real& num1, const float num2)
 	{
 		if (num1.IsNaN())
@@ -817,6 +1203,12 @@ namespace BigNumbersParser
 		return mpfr_cmp_d(num1.number, num2) < 0;
 	}
 
+	/**
+	 * Less-than comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is less than the second.
+	 */
 	bool operator<(const float num1, const Real& num2)
 	{
 		Real _num1(num2.GetBitPrecision(), num1);
@@ -824,6 +1216,13 @@ namespace BigNumbersParser
 		return _num1 < num2;
 	}
 
+	/**
+	 * Less-than-or-equal comparison operator.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is less than or equal to the second.
+	 */
 	bool operator<=(const Real& num1, const Real& num2)
 	{
 		if (num1.IsNaN() || num2.IsNaN())
@@ -832,26 +1231,56 @@ namespace BigNumbersParser
 		return mpfr_lessequal_p(num1.number, num2.number) != 0;
 	}
 
+	/**
+	 * Less-than-or-equal comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is less than or equal to the second.
+	 */
 	bool operator<=(const Real& num1, const int num2)
 	{
 		return (num1 < num2) || (num1 == num2);
 	}
 
+	/**
+	 * Less-than-or-equal comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is less than or equal to the second.
+	 */
 	bool operator<=(const int num1, const Real& num2)
 	{
 		return (num1 < num2) || (num1 == num2);
 	}
 
+	/**
+	 * Less-than-or-equal comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is less than or equal to the second.
+	 */
 	bool operator<=(const Real& num1, const float num2)
 	{
 		return (num1 < num2) || (num1 == num2);
 	}
 
+	/**
+	 * Less-than-or-equal comparison operator.
+	 * @param num1 The first instance to compare.
+	 * @param num2 The second instance to compare.
+	 * @return true if the first parameter is less than or equal to the second.
+	 */
 	bool operator<=(const float num1, const Real& num2)
 	{
 		return (num1 < num2) || (num1 == num2);
 	}
 
+	/**
+	 * Exponent function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num The argument.
+	 * @return The number raised to the exponent.
+	 */
 	Real exp(const Real& num)
 	{
 		Real res(num.GetBitPrecision());
@@ -869,6 +1298,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Natural logarithm function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num The argument.
+	 * @return The natural logarithm of the number.
+	 */
 	Real ln(const Real& num)
 	{
 		Real res(num.GetBitPrecision());
@@ -886,6 +1321,11 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Base 10 logarithm function.
+	 * @param num The argument.
+	 * @return Base 10 logarithm of the number.
+	 */
 	Real lg(const Real& num)
 	{
 		Real res = ln(num) / ln(Real(num.GetBitPrecision(), 10));
@@ -893,6 +1333,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Logarithm with base function.
+	 * @param num1 The base.
+	 * @param num2 The argument.
+	 * @return Logarithm with base of the number.
+	 */
 	Real log(const Real& num1, const Real& num2)
 	{
 		Real res = ln(num2) / ln(num1);
@@ -900,6 +1346,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Sine function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The sinus of the number.
+	 */
 	Real sin(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(num.GetBitPrecision());
@@ -956,6 +1409,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Cosine function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The cosine of the number.
+	 */
 	Real cos(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(num.GetBitPrecision());
@@ -1019,6 +1479,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Tangent function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The tangent of the number.
+	 */
 	Real tg(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(num.GetBitPrecision());
@@ -1057,6 +1524,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Cotangent function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The cotangent of the number.
+	 */
 	Real ctg(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(num.GetBitPrecision());
@@ -1095,6 +1569,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Secant function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The secant of the number.
+	 */
 	Real sec(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(num.GetBitPrecision());
@@ -1130,6 +1611,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Cosecant function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The cosecant of the number.
+	 */
 	Real cosec(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(num.GetBitPrecision());
@@ -1165,6 +1653,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Arcsine function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The arcsine of the number.
+	 */
 	Real arcsin(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(num.GetBitPrecision());
@@ -1188,6 +1683,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Arccosine function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The arccosine of the number.
+	 */
 	Real arccos(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(num.GetBitPrecision());
@@ -1211,6 +1713,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Arctangent function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The arctangent of the number.
+	 */
 	Real arctg(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(num.GetBitPrecision());
@@ -1231,6 +1740,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Arccotangent function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The arccotangent of the number.
+	 */
 	Real arcctg(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real _pi = pi(num.GetBitPrecision());
@@ -1245,6 +1761,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Arcsecant function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The arcsecant of the number.
+	 */
 	Real arcsec(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(arccos(1 / num, angleMeasure));
@@ -1252,6 +1775,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Acrcosecant function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The arccosecant of the number.
+	 */
 	Real arccosec(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(arcsin(1 / num, angleMeasure));
@@ -1259,6 +1789,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Hyperbolic sine function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The hyperbolic sine of the number.
+	 */
 	Real sh(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(num.GetBitPrecision());
@@ -1301,6 +1838,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Hyperbolic cosine function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The hyperbolic cosine of the number.
+	 */
 	Real ch(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(num.GetBitPrecision());
@@ -1343,6 +1887,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Hyperbolic tangent function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The hyperbolic tangent of the number.
+	 */
 	Real th(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(num.GetBitPrecision());
@@ -1385,6 +1936,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Hyperbolic cotangent function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The hyperbolic cotangent of the number.
+	 */
 	Real cth(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(num.GetBitPrecision());
@@ -1427,6 +1985,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Hyperbolic secant function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The hyperbolic secant of the number.
+	 */
 	Real sch(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(num.GetBitPrecision());
@@ -1450,6 +2015,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Hyperbolic cosecant function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The hyperbolic cosecant of the number.
+	 */
 	Real csch(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(num.GetBitPrecision());
@@ -1473,6 +2045,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Hyperbolic arcsine function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The hyperbolic arcsine of the number.
+	 */
 	Real arsh(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(num.GetBitPrecision());
@@ -1490,6 +2069,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Hyperbolic arccosine function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The hyperbolic arccosine of the number.
+	 */
 	Real arch(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(num.GetBitPrecision());
@@ -1507,6 +2093,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Hyperbolic arctangent function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The hyperbolic arctangent of the number.
+	 */
 	Real arth(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(num.GetBitPrecision());
@@ -1524,6 +2117,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Hyperbolic arccotangent function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The hyperbolic arccotangent of the number.
+	 */
 	Real arcth(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(num.GetBitPrecision());
@@ -1539,6 +2139,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Hyperbolic arcsecant function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The hyperbolic arcsecant of the number.
+	 */
 	Real arsch(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(num.GetBitPrecision());
@@ -1554,6 +2161,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Hyperbolic arccosecant function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The hyperbolic arccosecant of the number.
+	 */
 	Real arcsch(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(num.GetBitPrecision());
@@ -1569,6 +2183,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Pow function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 Base.
+	 * @param num2 Exponent.
+	 * @return Base raised to exponent.
+	 */
 	Real pow(const Real& num1, const Real& num2)
 	{
 		Real res(max(num1.GetBitPrecision() + 2, num2.GetBitPrecision() + 2));
@@ -1589,6 +2210,13 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Power function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 Base.
+	 * @param num2 Exponent.
+	 * @return Base raised to exponent.
+	 */
 	Real pow(const Real& num1, const int num2)
 	{
 		Real res(num1.GetBitPrecision());
@@ -1604,11 +2232,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
-	//Real pow(const Real& num1, const int num2, ParserExpression* pExpression)
-	//{
-	//	return pow(num1, num2);
-	//}
-
+	/**
+	 * Power function with exponent 2.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num1 Base.
+	 * @return Base raised to exponent 2.
+	 */
 	Real sqr(const Real& num)
 	{
 		Real res(num.GetBitPrecision());
@@ -1624,6 +2253,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Square root function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num The argument.
+	 * @return The square root of the number.
+	 */
 	Real sqrt(const Real& num)
 	{
 		Real res(num.GetBitPrecision());
@@ -1639,6 +2274,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Nth root function.
+	 * @param num1 The argument.
+	 * @param num2 The degree.
+	 * @return The nth root of the number.
+	 */
 	Real root(const Real& num1, const Real& num2)
 	{
 		Real res(pow(num1, 1 / num2));
@@ -1646,6 +2287,11 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Absolute number function.
+	 * @param num The argument.
+	 * @return Absolute value.
+	 */
 	Real abs(const Real& num)
 	{
 		Real res(num.GetBitPrecision());
@@ -1655,6 +2301,11 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Rounds to to the next lower or equal representable integer.
+	 * @param num The argument.
+	 * @return The rounded number.
+	 */
 	Real floor(const Real& num)
 	{
 		Real res(num.GetBitPrecision());
@@ -1664,6 +2315,11 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Fractional part of number.
+	 * @param num The argument.
+	 * @return The fractional part of the number.
+	 */
 	Real fract(const Real& num)
 	{
 		Real res(num.GetBitPrecision());
@@ -1673,6 +2329,11 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Rounds to the next representable integer toward zero.
+	 * @param num The argument.
+	 * @return The rounded number.
+	 */
 	Real trunc(const Real& num)
 	{
 		Real res(num.GetBitPrecision());
@@ -1682,6 +2343,11 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Rounds to the next higher or equal representable integer.
+	 * @param num The argument.
+	 * @return The rounded number.
+	 */
 	Real ceil(const Real& num)
 	{
 		Real res(num.GetBitPrecision());
@@ -1691,6 +2357,11 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Rounds to the nearest representable integer.
+	 * @param num The argument.
+	 * @return The rounded number.
+	 */
 	Real round(const Real& num)
 	{
 		Real res(num.GetBitPrecision());
@@ -1700,25 +2371,32 @@ namespace BigNumbersParser
 		return res;
 	}
 
-	Real remainder(const Real& dividend, const Real& divisor)
-	{
-		Real res(max(dividend.GetBitPrecision(), divisor.GetBitPrecision()));
-
-		mpfr_remainder(res.number, dividend.number, divisor.number, DEFAULT_RND);
-
-		return res;
-	}
-
+	/**
+	 * Gets integer of the number.
+	 * @param num The argument.
+	 * @return The integer.
+	 */
 	Real integer(const Real& num)
 	{
 		return trunc(num);
 	}
 
+	/**
+	 * Gets fraction of the number.
+	 * @param num The argument.
+	 * @return The fraction.
+	 */
 	Real fraction(const Real& num)
 	{
 		return fract(num);
 	}
 
+	/**
+	 * Factorial function.
+	 * @exception MathException Thrown when the mathematics error condition occurs.
+	 * @param num The argument.
+	 * @return The factorial of the number.
+	 */
 	Real fact(const Real& num)
 	{
 		Real res(num.GetBitPrecision());
@@ -1731,6 +2409,11 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Rounds to the nearest representable integer.
+	 * @param num The argument.
+	 * @return The rounded number.
+	 */
 	Real roundoff(const Real& num)
 	{
 		Real res(num.GetBitPrecision());
@@ -1740,11 +2423,21 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Exponent constant.
+	 * @param precision The precision.
+	 * @return The exponent constant.
+	 */
 	Real exp(const int precision)
 	{
 		return exp(Real(precision, 1));
 	}
 
+	/**
+	 * pi constant.
+	 * @param precision The precision.
+	 * @return The pi constant.
+	 */
 	Real pi(const int precision)
 	{
 		Real res(precision);
@@ -1754,6 +2447,10 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Converts degree to radian.
+	 * @return The result of the conversion.
+	 */
 	Real Real::DegreeToRadian() const
 	{
 		Real res = pi(GetBitPrecision()) / 180 * *this;
@@ -1761,6 +2458,10 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Converts radian to degree.
+	 * @return The result of the conversion.
+	 */
 	Real Real::RadianToDegree() const
 	{
 		Real res = 180 / pi(GetBitPrecision()) * *this;
@@ -1768,6 +2469,10 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Converts grad to radian.
+	 * @return The result of the conversion.
+	 */
 	Real Real::GradToRadian() const
 	{
 		Real res = pi(GetBitPrecision()) / 180 * *this * (float)0.9;
@@ -1775,6 +2480,10 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Converts radian to grad.
+	 * @return The result of the conversion.
+	 */
 	Real Real::RadianToGrad() const
 	{
 		Real res = 180 / pi(GetBitPrecision()) * *this * (float)0.9;
@@ -1782,6 +2491,10 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Converts degree to grad.
+	 * @return The result of the conversion.
+	 */
 	Real Real::DegreeToGrad() const
 	{
 		Real res = *this / (float)0.9;
@@ -1789,6 +2502,10 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Converts grad to degree.
+	 * @return The result of the conversion.
+	 */
 	Real Real::GradToDegree() const
 	{
 		Real res = *this * (float)0.9;
@@ -1796,6 +2513,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Converts rad to an angle measure.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The result of the conversion.
+	 */
 	Real rad(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res(num);
@@ -1813,6 +2536,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Converts degree to an angle measure.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The result of the conversion.
+	 */
 	Real degree(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res = num;
@@ -1830,6 +2559,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Converts degree minutes to an angle measure.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The result of the conversion.
+	 */
 	Real minute(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res = num;
@@ -1852,6 +2587,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Converts degree seconds to an angle measure.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The result of the conversion.
+	 */
 	Real second(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res = num;
@@ -1874,6 +2615,12 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Converts grad to an angle measure.
+	 * @param num	The argument.
+	 * @param angleMeasure The angle measure.
+	 * @return The result of the conversion.
+	 */
 	Real grad(const Real& num, AngleMeasure angleMeasure)
 	{
 		Real res = num;
@@ -1891,11 +2638,19 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Gets the precision.
+	 * @return The precision.
+	 */
 	int Real::GetPrecision() const
 	{
 		return MathHelper::ToDecimalPrecision(GetBitPrecision());
 	}
 
+	/**
+	 * Sets a precision.
+	 * @param precision The precision.
+	 */
 	void Real::SetPrecision(int precision)
 	{
 		if (stringNumber.empty())
@@ -1913,16 +2668,26 @@ namespace BigNumbersParser
 	#endif
 	}
 
+	/**
+	 * Raises the precision.
+	 */
 	void Real::RaisePrecision()
 	{
 		SetPrecision(GetPrecision() + 1);
 	}
 
+	/**
+	 * Sets lower precision.
+	 */
 	void Real::LowerPrecision()
 	{
 		SetPrecision(GetPrecision() - 1);
 	}
 
+	/**
+	 * Sets lower precision.
+	 * @param prec The prec.
+	 */
 	void Real::LowerPrecision(int prec)
 	{
 		if (GetBitPrecision() <= MathHelper::ToBitPrecision(prec))
@@ -1931,6 +2696,10 @@ namespace BigNumbersParser
 		SetPrecision(prec);
 	}
 
+	/**
+	 * Convert this number into a plain string representation.
+	 * @return A string representation of this number.
+	 */
 	string Real::ToString() const
 	{
 		std::ostringstream s;
@@ -1975,6 +2744,15 @@ namespace BigNumbersParser
 		return res;
 	}
 
+	/**
+	 * Convert this number into a string representation.
+	 * @param exp The exponent.
+	 * @param accuracy The accuracy.
+	 * @param [in,out] mantissaSign The mantissa sign.
+	 * @param [in,out] mantissa	The mantissa.
+	 * @param [in,out] exponentSign The exponent sign.
+	 * @param [in,out] exponent	The exponent.
+	 */
 	void Real::ToString(int exp, int accuracy, bool& mantissaSign, string& mantissa, bool& exponentSign, string& exponent) const
 	{
 		Real res(abs(*this));
@@ -2098,6 +2876,12 @@ namespace BigNumbersParser
 	}
 
 #ifdef _DEBUG
+	/**
+	 * Convert this number into a string representation.
+	 * @param exp	The exponent.
+	 * @param accuracy The accuracy.
+	 * @return A string representation of this number.
+	 */
 	string Real::ToString(int exp, int accuracy) const
 	{
 		bool mantissaSign;
@@ -2118,6 +2902,10 @@ namespace BigNumbersParser
 	}
 #endif
 
+	/**
+	 * Gets the number.
+	 * @return The number.
+	 */
 	Real Real::GetNumber()
 	{
 		Real res(*this);
@@ -2193,6 +2981,9 @@ namespace BigNumbersParser
 	//}
 
 #ifdef TRACE_OUTPUT
+	/**
+	 * Updates the numberStr field.
+	 */
 	void Real::UpdateNumberStr()
 	{
 		numberStr = ToString();

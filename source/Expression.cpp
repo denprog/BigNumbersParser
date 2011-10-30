@@ -3,6 +3,11 @@
 
 namespace BigNumbersParser
 {
+	/**
+	 * Constructor.
+	 * @tparam BigNumbersParser::Integer Integer type of the big numbers parser.
+	 * @param [in] expr The expression.
+	 */
 	template<>
 	Expression<BigNumbersParser::Integer>::Expression(string& expr) : Expression::base_type(expression)
 	{
@@ -66,11 +71,16 @@ namespace BigNumbersParser
 			'(' >> -(expression % ',') > ')';
 
 		//annotate the items with an expression's position
-		on_success(unary, boost::phoenix::function<Annotation<BigNumbersParser::Integer> >(Annotation<BigNumbersParser::Integer>(expr.begin(), expr.end()))(qi::_val, _1));
-		on_success(addition, boost::phoenix::function<Annotation<BigNumbersParser::Integer> >(Annotation<BigNumbersParser::Integer>(expr.begin(), expr.end()))(qi::_val, _1));
-		on_success(multiplication, boost::phoenix::function<Annotation<BigNumbersParser::Integer> >(Annotation<BigNumbersParser::Integer>(expr.begin(), expr.end()))(qi::_val, _1));
-		on_success(multiply, boost::phoenix::function<Annotation<BigNumbersParser::Integer> >(Annotation<BigNumbersParser::Integer>(expr.begin(), expr.end()))(qi::_val, _1));
-		on_success(identifier, boost::phoenix::function<Annotation<BigNumbersParser::Integer> >(Annotation<BigNumbersParser::Integer>(expr.begin(), expr.end()))(qi::_val, _1));
+		on_success(unary, 
+			boost::phoenix::function<Annotation<BigNumbersParser::Integer> >(Annotation<BigNumbersParser::Integer>(expr.begin(), expr.end()))(qi::_val, _1));
+		on_success(addition, 
+			boost::phoenix::function<Annotation<BigNumbersParser::Integer> >(Annotation<BigNumbersParser::Integer>(expr.begin(), expr.end()))(qi::_val, _1));
+		on_success(multiplication, 
+			boost::phoenix::function<Annotation<BigNumbersParser::Integer> >(Annotation<BigNumbersParser::Integer>(expr.begin(), expr.end()))(qi::_val, _1));
+		on_success(multiply, 
+			boost::phoenix::function<Annotation<BigNumbersParser::Integer> >(Annotation<BigNumbersParser::Integer>(expr.begin(), expr.end()))(qi::_val, _1));
+		on_success(identifier, 
+			boost::phoenix::function<Annotation<BigNumbersParser::Integer> >(Annotation<BigNumbersParser::Integer>(expr.begin(), expr.end()))(qi::_val, _1));
 		
 		//work out the exceptions
 		on_error<fail>(expression, 
@@ -84,6 +94,11 @@ namespace BigNumbersParser
 		//BOOST_SPIRIT_DEBUG_NODE(identifier);
 	}
 
+	/**
+	 * Constructor.
+	 * @tparam BigNumbersParser::Real Real type of the big numbers parser.
+	 * @param [in] expr The expression.
+	 */
 	template<>
 	Expression<BigNumbersParser::Real>::Expression(string& expr) : Expression::base_type(expression)
 	{
@@ -146,12 +161,19 @@ namespace BigNumbersParser
 			identifier >> 
 			'(' >> -(expression % ',') > ')';
 
-		on_success(unary, boost::phoenix::function<Annotation<BigNumbersParser::Real> >(Annotation<BigNumbersParser::Real>(expr.begin(), expr.end()))(qi::_val, _1));
-		on_success(addition, boost::phoenix::function<Annotation<BigNumbersParser::Real> >(Annotation<BigNumbersParser::Real>(expr.begin(), expr.end()))(qi::_val, _1));
-		on_success(multiplication, boost::phoenix::function<Annotation<BigNumbersParser::Real> >(Annotation<BigNumbersParser::Real>(expr.begin(), expr.end()))(qi::_val, _1));
-		on_success(multiply, boost::phoenix::function<Annotation<BigNumbersParser::Real> >(Annotation<BigNumbersParser::Real>(expr.begin(), expr.end()))(qi::_val, _1));
-		on_success(functionCall, boost::phoenix::function<Annotation<BigNumbersParser::Real> >(Annotation<BigNumbersParser::Real>(expr.begin(), expr.end()))(qi::_val, _1));
-		on_success(identifier, boost::phoenix::function<Annotation<BigNumbersParser::Real> >(Annotation<BigNumbersParser::Real>(expr.begin(), expr.end()))(qi::_val, _1));
+		//annotate the items with the expression's position
+		on_success(unary, 
+			boost::phoenix::function<Annotation<BigNumbersParser::Real> >(Annotation<BigNumbersParser::Real>(expr.begin(), expr.end()))(qi::_val, _1));
+		on_success(addition, 
+			boost::phoenix::function<Annotation<BigNumbersParser::Real> >(Annotation<BigNumbersParser::Real>(expr.begin(), expr.end()))(qi::_val, _1));
+		on_success(multiplication, 
+			boost::phoenix::function<Annotation<BigNumbersParser::Real> >(Annotation<BigNumbersParser::Real>(expr.begin(), expr.end()))(qi::_val, _1));
+		on_success(multiply, 
+			boost::phoenix::function<Annotation<BigNumbersParser::Real> >(Annotation<BigNumbersParser::Real>(expr.begin(), expr.end()))(qi::_val, _1));
+		on_success(functionCall, 
+			boost::phoenix::function<Annotation<BigNumbersParser::Real> >(Annotation<BigNumbersParser::Real>(expr.begin(), expr.end()))(qi::_val, _1));
+		on_success(identifier, 
+			boost::phoenix::function<Annotation<BigNumbersParser::Real> >(Annotation<BigNumbersParser::Real>(expr.begin(), expr.end()))(qi::_val, _1));
 		
 		on_error<fail>(expression, 
 			boost::phoenix::function<ErrorHandler<SyntaxException> >(ErrorHandler<SyntaxException>(expr.begin(), expr.end(), SyntaxError))(_3));
@@ -164,6 +186,11 @@ namespace BigNumbersParser
 		//BOOST_SPIRIT_DEBUG_NODE(identifier);
 	}
 
+	/**
+	 * Constructor.
+	 * @tparam BigNumbersParser::Rational Rational type of the big numbers parser.
+	 * @param [in] expr The expression.
+	 */
 	template<>
 	Expression<BigNumbersParser::Rational>::Expression(string& expr) : Expression::base_type(expression)
 	{
