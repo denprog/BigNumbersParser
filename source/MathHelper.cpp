@@ -10,7 +10,15 @@ namespace BigNumbersParser
 	map<int, int> MathHelper::bitPrecisions;
 	map<int, int> MathHelper::decimalPrecisions;
 	map<int, Real> MathHelper::realMiscs;
-	
+
+  struct Widen
+  {
+    wchar_t operator()(char c)
+    {
+      return std::use_facet<std::ctype<char> >(std::locale()).widen(c);
+    }
+  };
+
 	/**
 	 * Converts a string to a wstring.
 	 * @param str The narrow string.
@@ -19,14 +27,6 @@ namespace BigNumbersParser
 	wstring MathHelper::AToW(const string& str)
 	{
 		wstring res;
-
-		struct Widen
-		{
-			wchar_t operator()(char c)
-			{
-				return std::use_facet<std::ctype<char> >(std::locale()).widen(c);
-			}
-		};
 
 		std::transform(str.begin(), str.end(), std::back_inserter(res), Widen());
 
@@ -43,6 +43,14 @@ namespace BigNumbersParser
 		return AToW(string(str));
 	}
 
+  struct Narrow
+  {
+    char operator()(wchar_t c)
+    {
+      return std::use_facet<std::ctype<wchar_t> >(std::locale()).narrow(c, '@');
+    }
+  };
+
 	/**
 	 * Converts a wstring to a string.
 	 * @param str The wide string.
@@ -51,14 +59,6 @@ namespace BigNumbersParser
 	string MathHelper::WToA(const wstring& str)
 	{
 		string res;
-
-		struct Narrow
-		{
-			char operator()(wchar_t c)
-			{
-				return std::use_facet<std::ctype<wchar_t> >(std::locale()).narrow(c, '@');
-			}
-		};
 
 		std::transform(str.begin(), str.end(), std::back_inserter(res), Narrow());
 

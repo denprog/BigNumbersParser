@@ -28,8 +28,8 @@ namespace BigNumbersParser
 				);
 		}
 
-		Expression<Number> expression;
 		Definition<Number> definition;
+    Expression<Number> expression;
 		qi::rule<string::iterator, ScriptNode<Number>(), qi::space_type> script;
 	};
 };

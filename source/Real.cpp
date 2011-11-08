@@ -3,6 +3,8 @@
 
 namespace BigNumbersParser
 {
+  Real pi(const int precision);
+
 	/**
 	 * Default constructor.
 	 */
@@ -2794,7 +2796,11 @@ namespace BigNumbersParser
 				mantissa.insert(1, 1, '.');
 
 				--numExp;
+#ifdef _WIN32
 				_itoa_s(numExp, buf, 10);
+#else
+				sprintf(buf, "%d", numExp);
+#endif
 				exponent = buf;
 			}
 			else
@@ -2829,7 +2835,11 @@ namespace BigNumbersParser
 
 					if (numExp != 0)
 					{
-						_itoa_s(::abs(numExp), buf, 10);
+#ifdef _WIN32
+					  _itoa_s(::abs(numExp), buf, 10);
+#else
+					  sprintf(buf, "%d", ::abs(numExp));
+#endif
 						exponent = buf;
 					}
 					else
@@ -2856,7 +2866,11 @@ namespace BigNumbersParser
 
 				if (numExp != 0)
 				{
+#ifdef _WIN32
 					_itoa_s(::abs(numExp), buf, 10);
+#else
+					sprintf(buf, "%d", ::abs(numExp));
+#endif
 					exponent = buf;
 				}
 				else

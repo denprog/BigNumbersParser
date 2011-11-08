@@ -323,7 +323,7 @@ namespace BigNumbersParser
 		//there is no such an identifier
 		throw SyntaxException(UnknownIdentifier, op.pos, op.line);
 		
-		return 0;
+		return Real();
 	}
 
 	/**

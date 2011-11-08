@@ -125,7 +125,7 @@ namespace BigNumbersParser
 		/**
 		 * Operand visitor.
 		 */
-		template<typename Number>
+		template<typename Num>
 		struct OperandVisitor
 		{
 			/**
@@ -133,14 +133,14 @@ namespace BigNumbersParser
 			 * @param _annotation The annotation.
 			 * @param _iter The iterator position.
 			 */
-			OperandVisitor(Annotation<Number> const* _annotation, string::iterator _iter) : annotation(_annotation), iter(_iter)
+			OperandVisitor(Annotation<Num> const* _annotation, string::iterator _iter) : annotation(_annotation), iter(_iter)
 			{
 			}
 			
 			/**
 			 * The visitor's functor for OperationNode.
 			 */
-			void operator()(OperationNode<Number> const& op) const
+			void operator()(OperationNode<Num> const& op) const
 			{
 				annotation->UpdatePosition(iter, op);
 			}
@@ -148,14 +148,14 @@ namespace BigNumbersParser
 			/**
 			 * The visitor's functor for UnaryOperationNode.
 			 */
-			void operator()(UnaryOperationNode<Number> const& op) const
+			void operator()(UnaryOperationNode<Num> const& op) const
 			{
 			}
 
 			/**
 			 * The visitor's functor for IdentifierNode.
 			 */
-			void operator()(IdentifierNode<Number> const& op) const
+			void operator()(IdentifierNode<Num> const& op) const
 			{
 				annotation->UpdatePosition(iter, op);
 			}
@@ -163,7 +163,7 @@ namespace BigNumbersParser
 			/**
 			 * The visitor's functor for FunctionCallNode.
 			 */
-			void operator()(FunctionCallNode<Number> const& op) const
+			void operator()(FunctionCallNode<Num> const& op) const
 			{
 				annotation->UpdatePosition(iter, op);
 			}
@@ -171,20 +171,20 @@ namespace BigNumbersParser
 			/**
 			 * The visitor's functor for ExpressionNode.
 			 */
-			void operator()(ExpressionNode<Number> const& op) const
+			void operator()(ExpressionNode<Num> const& op) const
 			{
 			}
 
 			/**
 			 * The visitor's functor for Number.
 			 */
-			void operator()(Number const& op) const
+			void operator()(Num const& op) const
 			{
 				//((Number)op).SetPrecision(10);
 			}
 			
 			typedef void result_type;
-			Annotation<Number> const* annotation;
+			Annotation<Num> const* annotation;
 			string::iterator iter;
 		};
 

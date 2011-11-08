@@ -33,7 +33,7 @@ namespace BigNumbersParser
 		 * @param precision	(optional) the precision.
 		 * @return The result.
 		 */
-		Number Parse(string& expression, const int precision = -1)
+		Number Parse(string expression, const int precision = -1)
 		{
 			Number res;
 			string::iterator iter = expression.begin();
@@ -43,7 +43,7 @@ namespace BigNumbersParser
 			Script<Number> script(expression);
 			ScriptNode<Number> scriptNode;
 			
-			bool r = phrase_parse(iter, end, script, space, scriptNode);
+			phrase_parse(iter, end, script, space, scriptNode);
 			res = solver(scriptNode, precision);
 			
 			return res;
