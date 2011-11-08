@@ -25,14 +25,14 @@ namespace BigNumbersParser
 		typedef typename std::list<IdentifierNode<Number> >::const_iterator IdentifierNodesIter;
 		
 		//build-in functions' typedefs
-		typedef typename Number (*UnaryFunction)(const Number& num);
-		typedef typename Number (*BinaryFunction)(const Number& num1, const Number& num2);
-		typedef typename Number (*TrigonometricFunc)(const Number& num1, const AngleMeasure angleMeasure);
+		typedef Number (*UnaryFunction)(const Number& num);
+		typedef Number (*BinaryFunction)(const Number& num1, const Number& num2);
+		typedef Number (*TrigonometricFunc)(const Number& num1, const AngleMeasure angleMeasure);
 		typedef boost::variant<UnaryFunction, BinaryFunction, TrigonometricFunc> BuildinFunction;
 		
 		//build-in variables' typedefs
-		typedef typename Number (*Variable)();
-		typedef typename Number (*PrecisionVariable)(const int precision);
+		typedef Number (*Variable)();
+		typedef Number (*PrecisionVariable)(const int precision);
 		typedef boost::variant<Variable, PrecisionVariable> BuildinVariable;
 
 		/**
@@ -69,7 +69,7 @@ namespace BigNumbersParser
 		{
 			//calculate all the expression's nodes
 			Number res = boost::apply_visitor(*this, expr.first);
-			BOOST_FOREACH(OperationNode<Number>::Operand const& op, expr.rest)
+			BOOST_FOREACH(typename OperationNode<Number>::Operand const& op, expr.rest)
 			{
 				res = boost::apply_visitor(Solver<Number>(precision, res), op);
 			}
@@ -121,7 +121,7 @@ namespace BigNumbersParser
 				return -right;
 			}
 			
-			return 0;
+			return Number();
 		}
 
 		/**
@@ -152,7 +152,7 @@ namespace BigNumbersParser
 				throw MathException(e.id, op.pos, op.line);
 			}
 			
-			return 0;
+			return Number();
 		}
 
 		Number operator()(FunctionCallNode<Number> const& op) const;
@@ -169,7 +169,7 @@ namespace BigNumbersParser
 			
 			Number res;
 			//calculate all the script nodes
-			BOOST_FOREACH(ScriptNode<Number>::Operand const& op, script.list)
+			BOOST_FOREACH(typename ScriptNode<Number>::Operand const& op, script.list)
 			{
 				res = boost::apply_visitor(*this, op);
 			}
@@ -303,7 +303,7 @@ namespace BigNumbersParser
 		 */
 		BuildinFunction* FindBuildinFunction(const string& name) const
 		{
-			map<string, BuildinFunction>::const_iterator iter = buildinFunctions.find(name);
+			typename map<string, BuildinFunction>::const_iterator iter = buildinFunctions.find(name);
 			if (iter == buildinFunctions.end())
 				return NULL;
 			return (BuildinFunction*)&(*iter).second;
@@ -326,7 +326,7 @@ namespace BigNumbersParser
 		 */
 		BuildinVariable* FindBuildinVariable(const string& name) const
 		{
-			map<string, BuildinVariable>::const_iterator iter = buildinVariables.find(name);
+			typename map<string, BuildinVariable>::const_iterator iter = buildinVariables.find(name);
 			if (iter == buildinVariables.end())
 				return NULL;
 			return (BuildinVariable*)&(*iter).second;

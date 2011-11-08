@@ -63,17 +63,17 @@ public:
 private:
 	void FillTestTable();
 	
-	void AddTestCase(char* leftExpression, char* rightExpression, int precision = -1)
+	void AddTestCase(const char* leftExpression, const char* rightExpression, int precision = -1)
 	{
 		testTable.push_back(ParserTestCase<Number>(leftExpression, rightExpression, precision));
 	}
 
-	void AddTestCase(char* leftExpression, ParserExceptionCode expectedExceptionId, int pos, int line = 0)
+	void AddTestCase(const char* leftExpression, ParserExceptionCode expectedExceptionId, int pos, int line = 0)
 	{
 		testTable.push_back(ParserTestCase<Number>(leftExpression, expectedExceptionId, pos, line));
 	}
 
-	void AddTestCase(char* leftExpression, int precision, int exp, char* expectedResultStr)
+	void AddTestCase(const char* leftExpression, int precision, int exp, const char* expectedResultStr)
 	{
 		testTable.push_back(ParserTestCase<Number>(leftExpression, precision, exp, string(expectedResultStr)));
 	}

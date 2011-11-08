@@ -36,7 +36,7 @@ struct ParserTestCase
 	//	expectedException = -1;
 	//}
 
-	ParserTestCase(char* _expression, char* expectedResult, int prec) : 
+	ParserTestCase(const char* _expression, const char* expectedResult, int prec) :
 		resultDelta(MathHelper::ToBitPrecision(DEFAULT_TEST_PRECISION), (float)DEFAULT_RESULT_DELTA)
 	{
 		expression = _expression;
@@ -45,7 +45,7 @@ struct ParserTestCase
 		anyResult = false;
 	}
 
-	ParserTestCase(char* _expression, ParserExceptionCode id, int pos, int line = 0) : 
+	ParserTestCase(const char* _expression, ParserExceptionCode id, int pos, int line = 0) :
 		resultDelta(MathHelper::ToBitPrecision(DEFAULT_TEST_PRECISION), (float)DEFAULT_RESULT_DELTA), expectedException(id, pos, line)
 	{
 		expression = _expression;
@@ -53,7 +53,7 @@ struct ParserTestCase
 		anyResult = false;
 	}
 
-	ParserTestCase(char* _expression, int prec, int _exp, string& _expectedResultStr)
+	ParserTestCase(const char* _expression, int prec, int _exp, string _expectedResultStr)
 	{
 		expression = _expression;
 		exp = _exp;
@@ -162,6 +162,8 @@ struct ParserTestCase
 	vector<string> expectedResults;
 	vector<string> gottenResults;
 
+  Number resultDelta;
+
 	Number leftResult;
 	Number rightResult;
 	ParserException leftException;
@@ -170,11 +172,10 @@ struct ParserTestCase
 	int exp;
 	string expectedResultStr;
 	
-	Number resultDelta;
-
 	bool anyResult;
 };
 
+#ifdef _WIN32
 class DbgBuf : public std::basic_streambuf<char, char_traits<char> >
 {
 public:
@@ -188,5 +189,6 @@ public:
 		return 1;
 	}
 };
+#endif
 
 #endif

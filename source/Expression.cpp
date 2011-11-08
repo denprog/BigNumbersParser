@@ -17,6 +17,7 @@ namespace BigNumbersParser
 		using boost::spirit::qi::alnum;
 		using boost::spirit::qi::alpha;
 		using boost::spirit::qi::on_error;
+		using boost::spirit::qi::on_success;
 		using boost::spirit::qi::fail;
 		using boost::phoenix::function;
 		using namespace boost::phoenix::arg_names;

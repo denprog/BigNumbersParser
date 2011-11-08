@@ -3,6 +3,46 @@
 
 namespace BigNumbersParser
 {
+  Integer pow(const Integer& num1, const Integer& num2);
+
+  Real pow(const Real& num1, const Real& num2);
+
+  Real sin(const Real& num, AngleMeasure angleMeasure);
+  Real cos(const Real& num, AngleMeasure angleMeasure);
+  Real tg(const Real& num, AngleMeasure angleMeasure);
+  Real ctg(const Real& num, AngleMeasure angleMeasure);
+  Real sec(const Real& num, AngleMeasure angleMeasure);
+  Real cosec(const Real& num, AngleMeasure angleMeasure);
+  Real arcsin(const Real& num, AngleMeasure angleMeasure);
+  Real arccos(const Real& num, AngleMeasure angleMeasure);
+  Real arctg(const Real& num, AngleMeasure angleMeasure);
+  Real arcctg(const Real& num, AngleMeasure angleMeasure);
+  Real arcsec(const Real& num, AngleMeasure angleMeasure);
+  Real arccosec(const Real& num, AngleMeasure angleMeasure);
+  Real sh(const Real& num, AngleMeasure angleMeasure);
+  Real ch(const Real& num, AngleMeasure angleMeasure);
+  Real th(const Real& num, AngleMeasure angleMeasure);
+  Real cth(const Real& num, AngleMeasure angleMeasure);
+  Real sch(const Real& num, AngleMeasure angleMeasure);
+  Real csch(const Real& num, AngleMeasure angleMeasure);
+  Real arsh(const Real& num, AngleMeasure angleMeasure);
+  Real arch(const Real& num, AngleMeasure angleMeasure);
+  Real arth(const Real& num, AngleMeasure angleMeasure);
+  Real arcth(const Real& num, AngleMeasure angleMeasure);
+  Real arsch(const Real& num, AngleMeasure angleMeasure);
+  Real arcsch(const Real& num, AngleMeasure angleMeasure);
+
+  Real pi(const int precision);
+  Real exp(const int precision);
+
+  Real exp(const Real& num);
+
+  Real ln(const Real& num);
+  Real lg(const Real& num);
+  Real log(const Real& num1, const Real& num2);
+  Real sqrt(const Real& num);
+  Real root(const Real& num1, const Real& num2);
+
 	/**
 	 * Constructor.
 	 * @tparam BigNumbersParser::Integer Integer type of the big numbers parser.

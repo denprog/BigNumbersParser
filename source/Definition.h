@@ -16,7 +16,7 @@ namespace BigNumbersParser
 		 * Constructor.
 		 * @param [in] expr The expression.
 		 */
-		Definition(string& expr) : base_type(definition), expression(expr), returnExpression(expr)
+		Definition(string& expr) : Definition::base_type(definition), expression(expr), returnExpression(expr)
 		{
 			using boost::spirit::qi::lit;
 			using boost::spirit::qi::raw;
