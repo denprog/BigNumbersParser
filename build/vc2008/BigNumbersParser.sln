@@ -4,9 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BigNumbersParser", "lib\BigNumbersParser.vcproj", "{18B86548-5087-47FF-8045-4A67AEC93056}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BigNumbersParserTest", "lib_test\BigNumbersParserTest.vcproj", "{1F4E9371-85D5-45F4-BB75-96A7C8E9D4F2}"
-	ProjectSection(ProjectDependencies) = postProject
-		{18B86548-5087-47FF-8045-4A67AEC93056} = {18B86548-5087-47FF-8045-4A67AEC93056}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
