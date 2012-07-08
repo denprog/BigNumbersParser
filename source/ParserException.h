@@ -7,12 +7,12 @@ namespace BigNumbersParser
 	{
 		None = -1, 
 		SyntaxError = 1, 
-		WrongArgumentCount = 2, 
+		WrongArgumentsCount = 2, 
 		UnknownIdentifier = 3, 
 		DivisionByZero = 100, 
 		Overflow = 101, 
 		ArgumentIsOver = 102, 
-		ConversionDoesNotFits = 103
+		ConversionDoesNotFit = 103
 	};
 	
 	struct ParserException
