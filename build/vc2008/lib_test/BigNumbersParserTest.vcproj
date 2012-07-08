@@ -39,6 +39,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="0"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -81,7 +82,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy $(MPFR)Debug\mpfr.dll $(OutDir)\mpfr.dll&#x0D;&#x0A;copy $(MPIR)dll\Win32\Debug\mpir.dll $(OutDir)\mpir.dll"
+				CommandLine="copy $(MPFR)Debug\mpfr.dll $(OutDir)\mpfr.dll&#x0D;&#x0A;copy $(MPIR)dll\Win32\Debug\mpir.dll $(OutDir)\mpir.dll&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration

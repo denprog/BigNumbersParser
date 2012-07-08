@@ -39,12 +39,12 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/Zm1000"
+				AdditionalOptions="/Zm1000 /MP"
 				Optimization="0"
-				MinimalRebuild="true"
+				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				UsePrecompiledHeader="1"
+				UsePrecompiledHeader="0"
 				PrecompiledHeaderThrough="stdafx.h"
 				WarningLevel="3"
 				DebugInformationFormat="4"

@@ -49,6 +49,15 @@ namespace BigNumbersParser
 			return res;
 		}
 
+		/**
+		 * Sets a precision.
+		 * @param precision The precision.
+		 */
+		void SetPrecision(const int precision)
+		{
+			solver.SetPrecision(precision);
+		}
+		
 		Solver<Number> solver;	///< The solver
 	};
 };
