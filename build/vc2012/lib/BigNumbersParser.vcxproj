@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\source\Annotation.h" />
+    <ClInclude Include="..\..\..\source\Ast.h" />
+    <ClInclude Include="..\..\..\source\BigNumbersParser.h" />
+    <ClInclude Include="..\..\..\source\Definition.h" />
+    <ClInclude Include="..\..\..\source\ErrorHandler.h" />
+    <ClInclude Include="..\..\..\source\Expression.h" />
+    <ClInclude Include="..\..\..\source\Integer.h" />
+    <ClInclude Include="..\..\..\source\MathHelper.h" />
+    <ClInclude Include="..\..\..\source\ParserException.h" />
+    <ClInclude Include="..\..\..\source\Rational.h" />
+    <ClInclude Include="..\..\..\source\Real.h" />
+    <ClInclude Include="..\..\..\source\Script.h" />
+    <ClInclude Include="..\..\..\source\Solver.h" />
+    <ClInclude Include="..\..\..\source\stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\BigNumbersParser.cpp" />
+    <ClCompile Include="..\..\..\source\Definition.cpp" />
+    <ClCompile Include="..\..\..\source\Expression.cpp" />
+    <ClCompile Include="..\..\..\source\Integer.cpp" />
+    <ClCompile Include="..\..\..\source\MathHelper.cpp" />
+    <ClCompile Include="..\..\..\source\Rational.cpp" />
+    <ClCompile Include="..\..\..\source\Real.cpp" />
+    <ClCompile Include="..\..\..\source\Script.cpp" />
+    <ClCompile Include="..\..\..\source\Solver.cpp" />
+    <ClCompile Include="..\..\..\source\stdafx.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{85960F1E-3AB6-4E0D-B4CB-D3A2DE24BAFF}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>BigNumbersParser</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>d:\Lang\Microsoft DirectX SDK\Include;D:\Lang\boost_1_51_0;D:\Lang\mpfr-3.0.1;D:\Lang\Programs\BigNumbersParser\source;D:\Lang\mpir-1.3.1;d:\Lang\Qt\QtSources\4.8.1\;d:\Lang\Qt\QtSources\4.8.1\include\;D:\Lang\Programs\PEB\peb1\trunk\processors\PebParser\source;D:\Lang\Programs\PEB\peb1\trunk\editors\ReportEditor\include;d:\Lang\Programs\PEB\peb1\trunk\editors\ReportEditor\src\RepGen\;d:\Lang\Qt\Desktop\Qt\4.8.1\msvc2008\include\QtCore\;$(IncludePath)</IncludePath>
+    <LibraryPath>d:\Lang\Microsoft DirectX SDK\Lib\x86;D:\Lang\boost_1_51_0\stage\lib;D:\Lang\Visual Leak Detector\lib\Win32;d:\Lang\Qt\QtSources\4.8.1\lib\;d:\Lang\Qt\QtSources\4.8.1\plugins\sqldrivers\;D:\Lang\PostgreSQL\9.1\lib;D:\Lang\Programs\PEB\peb1\trunk\editors\bin;D:\Lang\Qt\Desktop\Qt\4.8.1\msvc2008\lib\;d:\Lang\Programs\PEB\peb1\trunk\bin\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>/MP4 %(AdditionalOptions)</AdditionalOptions>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(MPIR)dll\Win32\Debug\mpir.lib;$(MPFR)Debug\mpfr.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>$(MPIR)dll\Win32\Debug\mpir.lib;$(MPFR)Debug\mpfr.lib</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

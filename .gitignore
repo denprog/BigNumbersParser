@@ -7,3 +7,5 @@ build/vc2008/lib_test/BigNumbersParserTest.vcproj.Computer.Denis.user
 build/vc2008/lib/BigNumbersParser.vcproj.Computer.Denis.user
 build/vc2008/lib/Release/
 build/vc2008/lib_test/Release/
+build/vc2012/lib/Debug/
+*.vcxproj.user
