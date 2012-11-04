@@ -812,7 +812,7 @@ namespace BigNumbersParser
 		if (IsInteger())
 			return mpfr_get_si(number, DEFAULT_RND);
 		else
-			throw MathException(ConversionDoesNotFits);
+			throw MathException(ConversionDoesNotFit);
 	}
 
 	/**

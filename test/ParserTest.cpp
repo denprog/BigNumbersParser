@@ -446,7 +446,7 @@ void ParserTest<Real>::FillTestTable()
 
 	//errors
 	AddTestCase("po(2,3);", UnknownIdentifier, 0);
-	AddTestCase("pow(2);", WrongArgumentCount, 0);
+	AddTestCase("pow(2);", WrongArgumentsCount, 0);
 	AddTestCase("2+;", SyntaxError, 2);
 	AddTestCase("1/0;", DivisionByZero, 1);
 }

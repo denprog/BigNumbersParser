@@ -577,7 +577,7 @@ namespace BigNumbersParser
 	Integer::operator int() const
 	{
 		if (mpz_fits_slong_p(number) == 0)
-			throw MathException(ConversionDoesNotFits);
+			throw MathException(ConversionDoesNotFit);
 
 		return mpz_get_si(number);
 	}

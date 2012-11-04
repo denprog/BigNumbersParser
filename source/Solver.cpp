@@ -51,7 +51,7 @@ namespace BigNumbersParser
 			if (func.name.name == op.name.name)
 			{
 				if (func.arguments.size() != op.arguments.size())
-					throw SyntaxException(WrongArgumentCount, op.pos, op.line);
+					throw SyntaxException(WrongArgumentsCount, op.pos, op.line);
 				
 				IdentifierNodesIter funcIter = func.arguments.begin();
 				for (ExpressionNodesIter callIter = op.arguments.begin(); callIter != op.arguments.end(); ++callIter, ++funcIter)
@@ -73,7 +73,7 @@ namespace BigNumbersParser
 			{
 				UnaryFunction u = boost::get<UnaryFunction>(*func);
 				if (op.arguments.size() != 1)
-					throw SyntaxException(WrongArgumentCount, op.pos, op.line);
+					throw SyntaxException(WrongArgumentsCount, op.pos, op.line);
 				
 				ExpressionNodesIter callIter = op.arguments.begin();
 				Integer arg = (*this)(*callIter);
@@ -87,7 +87,7 @@ namespace BigNumbersParser
 			{
 				BinaryFunction b = boost::get<BinaryFunction>(*func);
 				if (op.arguments.size() != 2)
-					throw SyntaxException(WrongArgumentCount, op.pos, op.line);
+					throw SyntaxException(WrongArgumentsCount, op.pos, op.line);
 				
 				ExpressionNodesIter callIter = op.arguments.begin();
 				Integer arg1 = (*this)(*callIter++);
@@ -120,7 +120,7 @@ namespace BigNumbersParser
 			if (func.name.name == op.name.name)
 			{
 				if (func.arguments.size() != op.arguments.size())
-					throw SyntaxException(WrongArgumentCount);
+					throw SyntaxException(WrongArgumentsCount);
 				
 				IdentifierNodesIter funcIter = func.arguments.begin();
 				for (ExpressionNodesIter callIter = op.arguments.begin(); callIter != op.arguments.end(); ++callIter, ++funcIter)
@@ -142,7 +142,7 @@ namespace BigNumbersParser
 			{
 				UnaryFunction u = boost::get<UnaryFunction>(*func);
 				if (op.arguments.size() != 1)
-					throw SyntaxException(WrongArgumentCount, op.pos, op.line);
+					throw SyntaxException(WrongArgumentsCount, op.pos, op.line);
 				
 				ExpressionNodesIter callIter = op.arguments.begin();
 				Real arg = (*this)(*callIter);
@@ -156,7 +156,7 @@ namespace BigNumbersParser
 			{
 				BinaryFunction b = boost::get<BinaryFunction>(*func);
 				if (op.arguments.size() != 2)
-					throw SyntaxException(WrongArgumentCount, op.pos, op.line);
+					throw SyntaxException(WrongArgumentsCount, op.pos, op.line);
 				
 				ExpressionNodesIter callIter = op.arguments.begin();
 				Real arg1 = (*this)(*callIter++);
@@ -171,7 +171,7 @@ namespace BigNumbersParser
 			{
 				RealTrigonometricFunc t = boost::get<RealTrigonometricFunc>(*func);
 				if (op.arguments.size() != 1)
-					throw SyntaxException(WrongArgumentCount, op.pos, op.line);
+					throw SyntaxException(WrongArgumentsCount, op.pos, op.line);
 				
 				ExpressionNodesIter callIter = op.arguments.begin();
 				Real arg = (*this)(*callIter);
@@ -203,7 +203,7 @@ namespace BigNumbersParser
 			if (func.name.name == op.name.name)
 			{
 				if (func.arguments.size() != op.arguments.size())
-					throw SyntaxException(WrongArgumentCount, op.pos, op.line);
+					throw SyntaxException(WrongArgumentsCount, op.pos, op.line);
 				
 				IdentifierNodesIter funcIter = func.arguments.begin();
 				for (ExpressionNodesIter callIter = op.arguments.begin(); callIter != op.arguments.end(); ++callIter, ++funcIter)
@@ -225,7 +225,7 @@ namespace BigNumbersParser
 			{
 				UnaryFunction u = boost::get<UnaryFunction>(*func);
 				if (op.arguments.size() != 1)
-					throw SyntaxException(WrongArgumentCount, op.pos, op.line);
+					throw SyntaxException(WrongArgumentsCount, op.pos, op.line);
 				
 				ExpressionNodesIter callIter = op.arguments.begin();
 				Rational arg = (*this)(*callIter);
@@ -239,7 +239,7 @@ namespace BigNumbersParser
 			{
 				BinaryFunction b = boost::get<BinaryFunction>(*func);
 				if (op.arguments.size() != 2)
-					throw SyntaxException(WrongArgumentCount, op.pos, op.line);
+					throw SyntaxException(WrongArgumentsCount, op.pos, op.line);
 				
 				ExpressionNodesIter callIter = op.arguments.begin();
 				Rational arg1 = (*this)(*callIter++);
