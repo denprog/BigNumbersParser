@@ -59,7 +59,7 @@ namespace BigNumbersParser
 						++k;
 					++j;
 				}
-				
+			
 				++k;
 				++i;
 			}

@@ -6,8 +6,6 @@
 #include "MathHelper.h"
 #include "Integer.h"
 
-#define TRACE_OUTPUT
-
 using namespace std;
 
 namespace BigNumbersParser

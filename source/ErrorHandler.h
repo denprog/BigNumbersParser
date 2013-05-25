@@ -10,8 +10,6 @@ namespace BigNumbersParser
 	{
 		ErrorHandler(string::iterator _first, string::iterator _last, ParserExceptionCode _id) : first(_first), last(_last)
 		{
-			//pos = -1;
-			//line = -1;
 			id = _id;
 		}
 		
@@ -35,9 +33,6 @@ namespace BigNumbersParser
 				++i;
 			}
 			
-			//pos = i;
-			//line = j;
-			
 			throw Exception(id, i, j);
 		}
 
@@ -50,8 +45,6 @@ namespace BigNumbersParser
 		typedef void result_type;
 		string::iterator first;
 		string::iterator last;
-		//mutable int pos;
-		//mutable int line;
 		ParserExceptionCode id;
 	};
 }

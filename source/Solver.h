@@ -15,6 +15,30 @@ namespace BigNumbersParser
 	typedef Real (*RealPrecisionVariable)(const int precision);
 	typedef Rational (*RationalVariable)();
 
+	template<typename Number>
+	struct SolverSymbols
+	{
+		typedef pair<std::string, Number> TempVariable;
+
+		//build-in functions' typedefs
+		typedef Number (*UnaryFunction)(const Number& num);
+		typedef Number (*BinaryFunction)(const Number& num1, const Number& num2);
+		typedef Number (*TrigonometricFunction)(const Number& num1, const AngleMeasure angleMeasure);
+		typedef boost::variant<UnaryFunction, BinaryFunction, TrigonometricFunction> BuildinFunction;
+		
+		//build-in variables' typedefs
+		typedef Number (*Variable)();
+		typedef Number (*PrecisionVariable)(const int precision);
+		typedef boost::variant<Variable, PrecisionVariable> BuildinVariable;
+
+		mutable deque<TempVariable> tempVariables; ///< The temporary variables
+		mutable deque<VariableNode<Number> > variables;	///< The variables
+		mutable vector<FunctionNode<Number> > functions; ///< The functions
+
+		map<string, BuildinFunction> buildinFunctions; ///< The buildin functions
+		map<string, BuildinVariable> buildinVariables; ///< The buildin variables
+	};
+		
 	/**
 	 * Solver.
 	 */
@@ -24,25 +48,24 @@ namespace BigNumbersParser
 		typedef typename std::list<ExpressionNode<Number> >::const_iterator ExpressionNodesIter;		
 		typedef typename std::list<IdentifierNode<Number> >::const_iterator IdentifierNodesIter;
 		
-		//build-in functions' typedefs
-		typedef Number (*UnaryFunction)(const Number& num);
-		typedef Number (*BinaryFunction)(const Number& num1, const Number& num2);
-		typedef Number (*TrigonometricFunc)(const Number& num1, const AngleMeasure angleMeasure);
-		typedef boost::variant<UnaryFunction, BinaryFunction, TrigonometricFunc> BuildinFunction;
+		typedef typename SolverSymbols<Number>::TempVariable TempVariable;
+		typedef typename SolverSymbols<Number>::UnaryFunction UnaryFunction;
+		typedef typename SolverSymbols<Number>::BinaryFunction BinaryFunction;
+		typedef typename SolverSymbols<Number>::TrigonometricFunction TrigonometricFunction;
+		typedef typename SolverSymbols<Number>::BuildinFunction BuildinFunction;
 		
-		//build-in variables' typedefs
-		typedef Number (*Variable)();
-		typedef Number (*PrecisionVariable)(const int precision);
-		typedef boost::variant<Variable, PrecisionVariable> BuildinVariable;
-
+		typedef typename SolverSymbols<Number>::PrecisionVariable PrecisionVariable;
+		typedef typename SolverSymbols<Number>::BuildinVariable BuildinVariable;
+		typedef typename SolverSymbols<Number>::Variable Variable;
+		
+		SolverSymbols<Number>* symbols;
+		
 		/**
 		 * Constructor.
 		 * @param _precision The precision.
 		 * @param _leftValue (optional) the left value.
 		 */
-		Solver(int _precision, Number _leftValue = Number()) : precision(_precision), leftValue(_leftValue)
-		{
-		}
+		Solver(int _precision, Number _leftValue = Number(), SolverSymbols<Number>* _symbols = NULL);
 		
 		/**
 		 * Sets a precision.
@@ -71,7 +94,7 @@ namespace BigNumbersParser
 			Number res = boost::apply_visitor(*this, expr.first);
 			BOOST_FOREACH(typename OperationNode<Number>::Operand const& op, expr.rest)
 			{
-				res = boost::apply_visitor(Solver<Number>(precision, res), op);
+				res = boost::apply_visitor(Solver<Number>(precision, res, symbols), op);
 			}
 			
 			return res;
@@ -177,8 +200,6 @@ namespace BigNumbersParser
 			return res;
 		}
 
-		typedef pair<string, Number> TempVariable;
-
 		/**
 		 * Pushes a temporary variable.
 		 * @param name The name.
@@ -186,7 +207,7 @@ namespace BigNumbersParser
 		 */
 		void PushTempVariable(const string& name, Number& value) const
 		{
-			tempVariables.push_back(TempVariable(name, value));
+			symbols->tempVariables.push_back(TempVariable(name, value));
 		}
 		
 		/**
@@ -196,7 +217,7 @@ namespace BigNumbersParser
 		void PopTempVariable(int count = 1) const
 		{
 			for (int i = 0; i < count; ++i)
-				tempVariables.pop_back();
+				symbols->tempVariables.pop_back();
 		}
 		
 		/**
@@ -206,10 +227,10 @@ namespace BigNumbersParser
 		 */
 		TempVariable* FindTempVariable(const string& name) const
 		{
-			for (int i = tempVariables.size() - 1; i >= 0; --i)
+			for (int i = symbols->tempVariables.size() - 1; i >= 0; --i)
 			{
-				if (tempVariables[i].first == name)
-					return &tempVariables[i];
+				if (symbols->tempVariables[i].first == name)
+					return &symbols->tempVariables[i];
 			}
 			
 			return NULL;
@@ -221,7 +242,7 @@ namespace BigNumbersParser
 		 */
 		void PushVariable(VariableNode<Number> const& var) const
 		{
-			variables.push_back(var);
+			symbols->variables.push_back(var);
 		}
 		
 		/**
@@ -229,7 +250,7 @@ namespace BigNumbersParser
 		 */
 		void PopVariable() const
 		{
-			variables.pop_back();
+			symbols->variables.pop_back();
 		}
 
 		/**
@@ -239,10 +260,10 @@ namespace BigNumbersParser
 		 */
 		VariableNode<Number>* FindVariable(const string& name) const
 		{
-			for (int i = variables.size() - 1; i >=0; --i)
+			for (int i = symbols->variables.size() - 1; i >= 0; --i)
 			{
-				if (variables[i].name.name == name)
-					return &variables[i];
+				if (symbols->variables[i].name.name == name)
+					return &symbols->variables[i];
 			}
 			
 			return NULL;
@@ -254,16 +275,16 @@ namespace BigNumbersParser
 		 */
 		void AddFunction(FunctionNode<Number> const& func) const
 		{
-			for (int i = 0; i < (int)functions.size(); ++i)
+			for (int i = 0; i < (int)symbols->functions.size(); ++i)
 			{
-				if (functions[i].name.name == func.name.name)
+				if (symbols->functions[i].name.name == func.name.name)
 				{
-					functions[i] = func;
+					symbols->functions[i] = func;
 					return;
 				}
 			}
 
-			functions.push_back((FunctionNode<Number>&)func);
+			symbols->functions.push_back((FunctionNode<Number>&)func);
 		}
 		
 		/**
@@ -273,7 +294,7 @@ namespace BigNumbersParser
 		 */
 		void AddBuildinFunction(const char* name, UnaryFunction& func)
 		{
-			buildinFunctions[string(name)] = func;
+			symbols->buildinFunctions[string(name)] = func;
 		}
 
 		/**
@@ -283,7 +304,7 @@ namespace BigNumbersParser
 		 */
 		void AddBuildinFunction(const char* name, BinaryFunction& func)
 		{
-			buildinFunctions[string(name)] = func;
+			symbols->buildinFunctions[string(name)] = func;
 		}
 
 		/**
@@ -291,9 +312,9 @@ namespace BigNumbersParser
 		 * @param name The name.
 		 * @param [in,out] func The function.
 		 */
-		void AddBuildinFunction(const char* name, TrigonometricFunc& func)
+		void AddBuildinFunction(const char* name, TrigonometricFunction& func)
 		{
-			buildinFunctions[string(name)] = func;
+			symbols->buildinFunctions[string(name)] = func;
 		}
 		
 		/**
@@ -303,8 +324,8 @@ namespace BigNumbersParser
 		 */
 		BuildinFunction* FindBuildinFunction(const string& name) const
 		{
-			typename map<string, BuildinFunction>::const_iterator iter = buildinFunctions.find(name);
-			if (iter == buildinFunctions.end())
+			typename map<string, BuildinFunction>::const_iterator iter = symbols->buildinFunctions.find(name);
+			if (iter == symbols->buildinFunctions.end())
 				return NULL;
 			return (BuildinFunction*)&(*iter).second;
 		}
@@ -316,7 +337,7 @@ namespace BigNumbersParser
 		 */
 		void AddBuildinVariable(const char* name, PrecisionVariable& var)
 		{
-			buildinVariables[string(name)] = var;
+			symbols->buildinVariables[string(name)] = var;
 		}
 		
 		/**
@@ -326,18 +347,11 @@ namespace BigNumbersParser
 		 */
 		BuildinVariable* FindBuildinVariable(const string& name) const
 		{
-			typename map<string, BuildinVariable>::const_iterator iter = buildinVariables.find(name);
-			if (iter == buildinVariables.end())
+			typename map<string, BuildinVariable>::const_iterator iter = symbols->buildinVariables.find(name);
+			if (iter == symbols->buildinVariables.end())
 				return NULL;
 			return (BuildinVariable*)&(*iter).second;
 		}
-		
-		static deque<TempVariable> tempVariables; ///< The temporary variables
-		static deque<VariableNode<Number> > variables;	///< The variables
-		static vector<FunctionNode<Number> > functions; ///< The functions
-		
-		static map<string, BuildinFunction> buildinFunctions; ///< The buildin functions
-		static map<string, BuildinVariable> buildinVariables; ///< The buildin variables
 		
 		mutable int precision; ///< The precision
 		Number leftValue; ///< The left solved value

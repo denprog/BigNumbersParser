@@ -100,6 +100,7 @@ namespace BigNumbersParser
 		stringNumber = num;
 		mpfr_init2(number, max((int)mpfr_get_default_prec(), MathHelper::ToBitPrecision(num.length() * 2)) + 1);
 		mpfr_set_str(number, num.c_str(), DEFAULT_BASE, MPFR_RNDA);
+		SetPrecision(GetPrecision() + GetExp());
 
 #ifdef TRACE_OUTPUT
 		UpdateNumberStr();
@@ -2799,7 +2800,7 @@ namespace BigNumbersParser
 #ifdef _WIN32
 				_itoa_s(numExp, buf, 10);
 #else
-				sprintf(buf, "%d", numExp);
+				sprintf(buf, "%d", (int)numExp);
 #endif
 				exponent = buf;
 			}

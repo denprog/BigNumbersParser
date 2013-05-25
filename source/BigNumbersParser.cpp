@@ -146,4 +146,55 @@ namespace BigNumbersParser
 	Parser<BigNumbersParser::Rational>::Parser(const int precision) : solver(precision)
 	{
 	}
+
+	template<>
+	Integer Parser<Integer>::Parse(string expression, const int precision)
+	{
+		Integer res;
+		string::iterator iter = expression.begin();
+		string::iterator end = expression.end();
+		qi::space_type space;
+
+		Script<Integer> script(expression);
+		ScriptNode<Integer> scriptNode;
+
+		phrase_parse(iter, end, script, space, scriptNode);
+		res = solver(scriptNode, precision);
+
+		return res;
+	}
+
+	template<>
+	Real Parser<Real>::Parse(string expression, const int precision)
+	{
+		Real res;
+		string::iterator iter = expression.begin();
+		string::iterator end = expression.end();
+		qi::space_type space;
+
+		Script<Real> script(expression);
+		ScriptNode<Real> scriptNode;
+
+		phrase_parse(iter, end, script, space, scriptNode);
+		res = solver(scriptNode, precision);
+
+		return res;
+	}
+
+	template<>
+	Rational Parser<Rational>::Parse(string expression, const int precision)
+	{
+		Rational res;
+		string::iterator iter = expression.begin();
+		string::iterator end = expression.end();
+		qi::space_type space;
+
+		Script<Rational> script(expression);
+		ScriptNode<Rational> scriptNode;
+
+		phrase_parse(iter, end, script, space, scriptNode);
+		res = solver(scriptNode, precision);
+
+		return res;
+	}
 };

@@ -37,6 +37,7 @@
 #include <boost/spirit/include/phoenix_core.hpp>
 #include <boost/spirit/include/phoenix_function.hpp>
 #include <boost/spirit/include/phoenix_operator.hpp>
+#include <boost/spirit/include/qi_no_case.hpp>
 #include <boost/foreach.hpp>
 #include <boost/any.hpp>
 #include <boost/function.hpp>

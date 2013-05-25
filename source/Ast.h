@@ -11,6 +11,8 @@ namespace BigNumbersParser
 	template<typename Number>
 	struct IdentifierNode;
 	template<typename Number>
+	struct UnaryOperationNode;
+	template<typename Number>
 	struct OperationNode;
 	template<typename Number>
 	struct VariableNode;
@@ -70,8 +72,8 @@ namespace BigNumbersParser
 	{
 		typedef boost::variant<
 			Number, 
-			boost::recursive_wrapper<UnaryOperationNode<Number> >, 
 			boost::recursive_wrapper<IdentifierNode<Number> >, 
+			boost::recursive_wrapper<UnaryOperationNode<Number> >, 
 			boost::recursive_wrapper<OperationNode<Number> >, 
 			boost::recursive_wrapper<FunctionCallNode<Number> >, 
 			boost::recursive_wrapper<ExpressionNode<Number> > > 

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="84">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="source" displayName="source" projectFiles="true">
+      <itemPath>../source/Annotation.h</itemPath>
+      <itemPath>../source/Ast.h</itemPath>
+      <itemPath>../source/BigNumbersParser.cpp</itemPath>
+      <itemPath>../source/BigNumbersParser.h</itemPath>
+      <itemPath>../source/Definition.cpp</itemPath>
+      <itemPath>../source/Definition.h</itemPath>
+      <itemPath>../source/ErrorHandler.h</itemPath>
+      <itemPath>../source/Expression.cpp</itemPath>
+      <itemPath>../source/Expression.h</itemPath>
+      <itemPath>../source/Integer.cpp</itemPath>
+      <itemPath>../source/Integer.h</itemPath>
+      <itemPath>../source/MathHelper.cpp</itemPath>
+      <itemPath>../source/MathHelper.h</itemPath>
+      <itemPath>../source/ParserException.h</itemPath>
+      <itemPath>../source/Rational.cpp</itemPath>
+      <itemPath>../source/Rational.h</itemPath>
+      <itemPath>../source/Real.cpp</itemPath>
+      <itemPath>../source/Real.h</itemPath>
+      <itemPath>../source/Script.cpp</itemPath>
+      <itemPath>../source/Script.h</itemPath>
+      <itemPath>../source/Solver.cpp</itemPath>
+      <itemPath>../source/Solver.h</itemPath>
+      <itemPath>../source/stdafx.cpp</itemPath>
+      <itemPath>../source/stdafx.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="test" displayName="test" projectFiles="true">
+      <itemPath>../test/ParserTest.cpp</itemPath>
+      <itemPath>../test/ParserTest.h</itemPath>
+      <itemPath>../test/Test.cpp</itemPath>
+      <itemPath>../test/Test.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>../source</Elem>
+    <Elem>../test</Elem>
+  </sourceRootList>
+  <projectmakefile>nbproject/Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug_shared" type="2">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <commandLine>-std=c++0x</commandLine>
+        </ccTool>
+        <linkerTool>
+          <output>./nbproject/build/${CND_CONF}/libBigNumbersParser.${CND_DLIB_EXT}</output>
+          <linkerLibItems>
+            <linkerLibLibItem>mpfr</linkerLibLibItem>
+            <linkerLibLibItem>boost_unit_test_framework</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <packaging>
+        <packType>Tar</packType>
+        <output>./nbproject/package/${CND_CONF}/libbuild.so.tar</output>
+        <packFileList>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}lib/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="644"
+                            owner="root"
+                            group="bin"/>
+        </packFileList>
+      </packaging>
+    </conf>
+    <conf name="Release" type="2">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+    </conf>
+    <conf name="Debug_test" type="1">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <commandLine>-std=c++0x</commandLine>
+          <preprocessorList>
+            <Elem>TRACE_OUTPUT</Elem>
+          </preprocessorList>
+        </ccTool>
+        <linkerTool>
+          <output>./nbproject/build/${CND_CONF}/${CND_CONF}</output>
+          <linkerLibItems>
+            <linkerLibLibItem>mpfr</linkerLibLibItem>
+            <linkerLibLibItem>boost_unit_test_framework</linkerLibLibItem>
+            <linkerLibLibItem>boost_test_exec_monitor</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <packaging>
+        <packType>Tar</packType>
+        <output>./nbproject/package/${CND_CONF}/libbuild.so.tar</output>
+        <additionalOptions>-v</additionalOptions>
+        <packTopDir>./nbproject/build</packTopDir>
+        <packFileList>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
+        </packFileList>
+      </packaging>
+    </conf>
+  </confs>
+</configurationDescriptor>

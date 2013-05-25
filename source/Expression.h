@@ -2,7 +2,7 @@
 #define EXPRESSION_H
 
 #include "stdafx.h"
-#include "ast.h"
+#include "Ast.h"
 #include "ErrorHandler.h"
 #include "Annotation.h"
 
@@ -31,7 +31,7 @@ namespace BigNumbersParser
 		qi::rule<string::iterator, UnaryOperationNode<Number>(), qi::space_type> unaryOperation;
 		qi::rule<string::iterator, IdentifierNode<Number>(), qi::space_type> identifier;
 		qi::rule<string::iterator, FunctionCallNode<Number>(), qi::space_type> functionCall;
-		qi::rule<string::iterator, string(), qi::space_type> str;
+		qi::rule<string::iterator, string(), qi::space_type> str, expNumber;
 		qi::rule<string::iterator, string(), qi::space_type> name;
 		qi::rule<string::iterator, Number(), qi::space_type> number;
 	};

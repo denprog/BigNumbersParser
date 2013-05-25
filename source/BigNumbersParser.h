@@ -33,21 +33,7 @@ namespace BigNumbersParser
 		 * @param precision	(optional) the precision.
 		 * @return The result.
 		 */
-		Number Parse(string expression, const int precision = -1)
-		{
-			Number res;
-			string::iterator iter = expression.begin();
-			string::iterator end = expression.end();
-			qi::space_type space;
-			
-			Script<Number> script(expression);
-			ScriptNode<Number> scriptNode;
-			
-			phrase_parse(iter, end, script, space, scriptNode);
-			res = solver(scriptNode, precision);
-			
-			return res;
-		}
+		Number Parse(string expression, const int precision = -1);
 
 		/**
 		 * Sets a precision.

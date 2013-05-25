@@ -4,38 +4,29 @@
 namespace BigNumbersParser
 {
 	template<>
-	deque<Solver<Integer>::TempVariable> Solver<Integer>::tempVariables;		
+	Solver<Integer>::Solver(int _precision, Integer _leftValue, SolverSymbols<Integer>* _symbols) : 
+		precision(_precision), leftValue(_leftValue), symbols(_symbols)
+	{
+		if (symbols == NULL)
+			symbols = new SolverSymbols<Integer>();
+	}
+		
 	template<>
-	deque<VariableNode<Integer> > Solver<Integer>::variables;		
-	template<>
-	vector<FunctionNode<Integer> > Solver<Integer>::functions;
-	template<>
-	map<string, Solver<Integer>::BuildinFunction> Solver<Integer>::buildinFunctions;
-	template<>
-	map<string, Solver<Integer>::BuildinVariable> Solver<Integer>::buildinVariables;
+	Solver<Real>::Solver(int _precision, Real _leftValue, SolverSymbols<Real>* _symbols) : 
+		precision(_precision), leftValue(_leftValue), symbols(_symbols)
+	{
+		if (symbols == NULL)
+			symbols = new SolverSymbols<Real>();
+	}
 	
 	template<>
-	deque<Solver<Real>::TempVariable> Solver<Real>::tempVariables;		
-	template<>
-	deque<VariableNode<Real> > Solver<Real>::variables;		
-	template<>
-	vector<FunctionNode<Real> > Solver<Real>::functions;
-	template<>
-	map<string, Solver<Real>::BuildinFunction> Solver<Real>::buildinFunctions;
-	template<>
-	map<string, Solver<Real>::BuildinVariable> Solver<Real>::buildinVariables;
-
-	template<>
-	deque<Solver<Rational>::TempVariable> Solver<Rational>::tempVariables;		
-	template<>
-	deque<VariableNode<Rational> > Solver<Rational>::variables;		
-	template<>
-	vector<FunctionNode<Rational> > Solver<Rational>::functions;
-	template<>
-	map<string, Solver<Rational>::BuildinFunction> Solver<Rational>::buildinFunctions;
-	template<>
-	map<string, Solver<Rational>::BuildinVariable> Solver<Rational>::buildinVariables;
-
+	Solver<Rational>::Solver(int _precision, Rational _leftValue, SolverSymbols<Rational>* _symbols) : 
+		precision(_precision), leftValue(_leftValue), symbols(_symbols)
+	{
+		if (symbols == NULL)
+			symbols = new SolverSymbols<Rational>();
+	}
+	
 	/**
 	 * Visitor's functor for FunctionCallNode<Integer>.
 	 */
@@ -45,9 +36,9 @@ namespace BigNumbersParser
 		Integer res;
 		
 		//find in the user defined functions		
-		for (int i = 0; i < (int)functions.size(); ++i)
+		for (int i = 0; i < (int)symbols->functions.size(); ++i)
 		{
-			const FunctionNode<Integer>& func = functions[i];
+			const FunctionNode<Integer>& func = symbols->functions[i];
 			if (func.name.name == op.name.name)
 			{
 				if (func.arguments.size() != op.arguments.size())
@@ -114,9 +105,9 @@ namespace BigNumbersParser
 		Real res;
 		
 		//find in the user defined functions		
-		for (int i = 0; i < (int)functions.size(); ++i)
+		for (int i = 0; i < (int)symbols->functions.size(); ++i)
 		{
-			const FunctionNode<Real>& func = functions[i];
+			const FunctionNode<Real>& func = symbols->functions[i];
 			if (func.name.name == op.name.name)
 			{
 				if (func.arguments.size() != op.arguments.size())
@@ -197,9 +188,9 @@ namespace BigNumbersParser
 		Rational res;
 		
 		//find in the user defined functions		
-		for (int i = 0; i < (int)functions.size(); ++i)
+		for (int i = 0; i < (int)symbols->functions.size(); ++i)
 		{
-			const FunctionNode<Rational>& func = functions[i];
+			const FunctionNode<Rational>& func = symbols->functions[i];
 			if (func.name.name == op.name.name)
 			{
 				if (func.arguments.size() != op.arguments.size())

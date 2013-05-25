@@ -26,9 +26,9 @@ namespace BigNumbersParser
 		
 		ParserException(ParserExceptionCode _id, int _pos, int _line)
 		{
-			 id = _id;
-			 pos = _pos;
-			 line = _line;
+			id = _id;
+			pos = _pos;
+			line = _line;
 		}
 		
 		friend bool operator==(const ParserException& e1, const ParserException& e2)

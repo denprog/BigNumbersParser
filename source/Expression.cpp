@@ -108,6 +108,7 @@ namespace BigNumbersParser
 		using boost::spirit::qi::lexeme;
 		using boost::spirit::qi::alnum;
 		using boost::spirit::qi::alpha;
+		using boost::spirit::qi::no_case;
 		using boost::spirit::qi::on_error;
 		using boost::spirit::qi::fail;
 		using boost::phoenix::function;
@@ -143,10 +144,14 @@ namespace BigNumbersParser
 			'(' > expression > ')';
 		
 		number = 
+			expNumber | 
 			str;
 		
 		str = 
 			+char_("0-9.");
+		
+		expNumber = 
+			+char_("0-9.") >> raw[lexeme[(no_case[char_("E")] > (char_('+') | char_('-')))]] > +(char_("0-9"));
 
 		identifier = 
 			name;
