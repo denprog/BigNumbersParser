@@ -16,9 +16,6 @@ boost::test_tools::predicate_result ParserTest<BigNumbersParser::Integer>::Compa
 
 		boost::test_tools::predicate_result res(false);
 
-		string resultStr = result.ToString();
-		string expectedStr = expected.ToString();
-
 		sprintf(buf1, "Result parser exception id = %d", testCase.expectedException.id);
 		sprintf(buf2, "Expected parser exception id = %d", testCase.leftException.id);
 		res.message() << testCase.expression.c_str() << " != " << buf1 << ":" << buf2;
@@ -78,29 +75,6 @@ boost::test_tools::predicate_result ParserTest<BigNumbersParser::Real>::CompareR
 	char buf1[200], buf2[200];
 	
 	Real result = testCase.leftResult;
-
-	if (!testCase.expectedResultStr.empty())
-	{
-		boost::test_tools::predicate_result res(false);
-		
-		if (testCase.leftException.id != None)
-		{
-			sprintf(buf1, "Result exception id = %d", testCase.leftException.id);
-			res.message() << testCase.expression.c_str() << " != " << 
-				testCase.expectedResultStr.c_str() << " : " << buf1;
-			return res;
-		}
-		
-		string r = result.ToString(testCase.exp, testCase.precision);
-		if (r == testCase.expectedResultStr)
-			return true;
-		
-		res.message() << testCase.expression.c_str() << " != " << 
-			testCase.expectedResultStr.c_str() << " : " << r.c_str();
-		
-		return res;
-	}
-
 	Real expected = testCase.rightResult;
 
 	if (testCase.expectedException.id != None)
@@ -109,9 +83,6 @@ boost::test_tools::predicate_result ParserTest<BigNumbersParser::Real>::CompareR
 			return true;
 
 		boost::test_tools::predicate_result res(false);
-
-		string resultStr = result.ToString();
-		string expectedStr = expected.ToString();
 
 		sprintf(buf1, "Result exception id = %d", testCase.expectedException.id);
 		sprintf(buf2, "Expected exception id = %d", testCase.leftException.id);
@@ -183,9 +154,6 @@ boost::test_tools::predicate_result ParserTest<Rational>::CompareResults(const P
 			return true;
 
 		boost::test_tools::predicate_result res(false);
-
-		string resultStr = result.ToString();
-		string expectedStr = expected.ToString();
 
 		sprintf(buf1, "Result parser exception id = %d", testCase.expectedException.id);
 		sprintf(buf2, "Expected parser exception id = %d", testCase.leftException.id);
@@ -382,7 +350,7 @@ void ParserTest<Real>::FillTestTable()
 	AddTestCase("3.456789/5.345677657;", 30, 3, "0.646651223998409524751484655409E+0");
 	AddTestCase("(5.12+3.5632)*(20.345-10.234/2.5435);", 10, 3, "141.7220712892E+0");
 
-	//variables
+//	variables
 	AddTestCase("m=5+4;m+6;", "15");
 	AddTestCase("m=5+4;m=1;m+6;", "7");
 	AddTestCase("s=1;p=5;m=s+p;m+6;", "12");
@@ -397,7 +365,7 @@ void ParserTest<Real>::FillTestTable()
 	AddTestCase("pow(2+3,4)", "625");
 	AddTestCase("pow(5-7,4+2)", "64");
 	AddTestCase("pow(pow(5 - 7, 2), 4 + 2)", "4096");
-	AddTestCase("pow(pow(5.34 - 7.53, 2), 4.256 + 2)", 10, 3, "1.8181795339E+4");
+	AddTestCase("pow(pow(5.34 - 7.53, 2), 4.256 + 2)", 10, 3, "1.81817953390917E+4");
 	
 	AddTestCase("sqrt(2)", 10, 3, "1.4142135624E+0");
 	AddTestCase("sqrt(10.231)", 10, 3, "3.1985934409E+0");

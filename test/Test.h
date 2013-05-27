@@ -53,11 +53,16 @@ struct ParserTestCase
 		anyResult = false;
 	}
 
-	ParserTestCase(const char* _expression, int prec, int _exp, string _expectedResultStr)
+	ParserTestCase(const char* _expression, int prec, int _exp, string expectedResult)
 	{
+		string p("0.");
+		for (int i = 0; i < prec - 1; ++i)
+			p += "0";
+		p += "1";
+		resultDelta = Number(p);
 		expression = _expression;
 		exp = _exp;
-		expectedResultStr = _expectedResultStr;
+		expectedResults.push_back(expectedResult);
 		precision = prec;
 		anyResult = false;
 	}
