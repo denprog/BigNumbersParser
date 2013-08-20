@@ -238,6 +238,10 @@ void ParserTest<BigNumbersParser::Integer>::FillTestTable()
 	AddTestCase("2*3", "6");
 
 	AddTestCase("10/2", "5");
+	AddTestCase("10/3", "3");
+	AddTestCase("100/33", "3");
+	AddTestCase("10/30", "0");
+	AddTestCase("3/3", "1");
 
 	AddTestCase("2+3*5", "17");
 	AddTestCase("25-5+4*5/2;", "30;");

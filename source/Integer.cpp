@@ -323,8 +323,7 @@ namespace BigNumbersParser
 		if (num2 == 0)
 			throw MathException(DivisionByZero);
 
-		//mpz_div(res.number, num1.number, num2.number);
-		mpz_divexact(res.number, num1.number, num2.number);
+		mpz_div(res.number, num1.number, num2.number);
 
 		return res;
 	}

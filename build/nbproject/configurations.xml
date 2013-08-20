@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="84">
+<configurationDescriptor version="89">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="source" displayName="source" projectFiles="true">
       <itemPath>../source/Annotation.h</itemPath>
@@ -54,6 +54,8 @@
       <toolsSet>
         <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
         <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
         <ccTool>
@@ -79,11 +81,69 @@
                             group="bin"/>
         </packFileList>
       </packaging>
+      <item path="../source/Annotation.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Ast.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/BigNumbersParser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/BigNumbersParser.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Definition.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/Definition.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/ErrorHandler.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Expression.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/Expression.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Integer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/Integer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/MathHelper.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/MathHelper.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/ParserException.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Rational.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/Rational.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Real.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/Real.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Script.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/Script.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Solver.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/Solver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/stdafx.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/stdafx.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../test/ParserTest.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../test/ParserTest.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../test/Test.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../test/Test.h" ex="false" tool="3" flavor2="0">
+      </item>
     </conf>
     <conf name="Release" type="2">
       <toolsSet>
         <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
         <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
         <cTool>
@@ -99,11 +159,69 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="../source/Annotation.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Ast.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/BigNumbersParser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/BigNumbersParser.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Definition.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/Definition.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/ErrorHandler.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Expression.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/Expression.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Integer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/Integer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/MathHelper.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/MathHelper.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/ParserException.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Rational.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/Rational.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Real.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/Real.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Script.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/Script.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Solver.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/Solver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/stdafx.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/stdafx.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../test/ParserTest.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../test/ParserTest.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../test/Test.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../test/Test.h" ex="false" tool="3" flavor2="0">
+      </item>
     </conf>
     <conf name="Debug_test" type="1">
       <toolsSet>
         <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
         <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
         <ccTool>
@@ -135,6 +253,62 @@
                             group="bin"/>
         </packFileList>
       </packaging>
+      <item path="../source/Annotation.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Ast.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/BigNumbersParser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/BigNumbersParser.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Definition.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/Definition.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/ErrorHandler.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Expression.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/Expression.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Integer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/Integer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/MathHelper.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/MathHelper.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/ParserException.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Rational.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/Rational.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Real.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/Real.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Script.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/Script.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/Solver.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/Solver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../source/stdafx.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../source/stdafx.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../test/ParserTest.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../test/ParserTest.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../test/Test.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../test/Test.h" ex="false" tool="3" flavor2="0">
+      </item>
     </conf>
   </confs>
 </configurationDescriptor>
