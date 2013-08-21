@@ -9,6 +9,7 @@ namespace BigNumbersParser
 		SyntaxError = 1, 
 		WrongArgumentsCount = 2, 
 		UnknownIdentifier = 3, 
+		ExpressionExpected = 4,
 		DivisionByZero = 100, 
 		Overflow = 101, 
 		ArgumentIsOver = 102, 
