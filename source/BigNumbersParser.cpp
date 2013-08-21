@@ -150,6 +150,9 @@ namespace BigNumbersParser
 	template<>
 	Integer Parser<Integer>::Parse(string expression, const int precision)
 	{
+		if (expression.empty())
+			throw SyntaxException(ExpressionExpected, 0, 0);
+		
 		Integer res;
 		string::iterator iter = expression.begin();
 		string::iterator end = expression.end();
@@ -167,6 +170,9 @@ namespace BigNumbersParser
 	template<>
 	Real Parser<Real>::Parse(string expression, const int precision)
 	{
+		if (expression.empty())
+			throw SyntaxException(ExpressionExpected, 0, 0);
+		
 		Real res;
 		string::iterator iter = expression.begin();
 		string::iterator end = expression.end();
@@ -184,6 +190,9 @@ namespace BigNumbersParser
 	template<>
 	Rational Parser<Rational>::Parse(string expression, const int precision)
 	{
+		if (expression.empty())
+			throw SyntaxException(ExpressionExpected, 0, 0);
+		
 		Rational res;
 		string::iterator iter = expression.begin();
 		string::iterator end = expression.end();
