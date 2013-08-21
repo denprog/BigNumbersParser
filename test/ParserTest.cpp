@@ -309,6 +309,7 @@ void ParserTest<BigNumbersParser::Integer>::FillTestTable()
 	//errors
 	AddTestCase("2+;", SyntaxError, 2);
 	AddTestCase("1/0;", DivisionByZero, 1);
+	AddTestCase("", ExpressionExpected, 0);
 }
 
 template<>
@@ -421,6 +422,7 @@ void ParserTest<Real>::FillTestTable()
 	AddTestCase("pow(2);", WrongArgumentsCount, 0);
 	AddTestCase("2+;", SyntaxError, 2);
 	AddTestCase("1/0;", DivisionByZero, 1);
+	AddTestCase("", ExpressionExpected, 0);
 }
 
 template<>
@@ -430,4 +432,7 @@ void ParserTest<Rational>::FillTestTable()
 	AddTestCase("1/2;", "1/2;");
 	AddTestCase("1/2 + 3/4;", "5/4;");
 	AddTestCase("5/2 - 1/4;", "9/4;");
+
+	//errors
+	AddTestCase("", ExpressionExpected, 0);
 }
